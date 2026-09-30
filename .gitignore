@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.db
+
+# Node
+node_modules/
+.next/
+.pnpm-store/
+
+# 프론트는 pnpm만 사용 (다른 lock 파일 커밋 방지)
+package-lock.json
+yarn.lock
+
+# 환경변수 (절대 커밋 금지)
+.env
+.env.local
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+
+# 업로드 파일
+backend/uploads/
+
+# 문서
+DOCS/
