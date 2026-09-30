@@ -1,0 +1,94 @@
+{
+  "doc_type": {
+    "value": "공고",
+    "quote": null
+  },
+  "company": {
+    "value": "마바베이커리(모의)",
+    "quote": "마바베이커리(모의)"
+  },
+  "headcount": {
+    "value": null,
+    "quote": null
+  },
+  "employment_type": {
+    "value": "기타",
+    "quote": "아르바이트"
+  },
+  "contract_period_months": {
+    "value": null,
+    "quote": null
+  },
+  "probation": {
+    "value": null,
+    "quote": null
+  },
+  "workplace": {
+    "value": "서울 마포구 ○○동 매장",
+    "quote": "서울 마포구 ○○동 매장"
+  },
+  "job_duties": {
+    "value": "빵 진열 및 계산",
+    "quote": "빵 진열 및 계산"
+  },
+  "work_days_per_week": {
+    "value": 3,
+    "quote": "주 3일 (토, 일, 월)"
+  },
+  "work_days_desc": {
+    "value": null,
+    "quote": null
+  },
+  "start_time": {
+    "value": "10:00",
+    "quote": "10:00 ~ 15:00 (휴게 30분)"
+  },
+  "end_time": {
+    "value": "15:00",
+    "quote": "10:00 ~ 15:00 (휴게 30분)"
+  },
+  "break_minutes": {
+    "value": 30,
+    "quote": "휴게 30분"
+  },
+  "weekly_hours": {
+    "value": null,
+    "quote": null
+  },
+  "wage": {
+    "value": {
+      "type": "시급",
+      "amount_min": 11000,
+      "amount_max": 11000
+    },
+    "quote": "시급 11,000원"
+  },
+  "comprehensive_wage": {
+    "value": null,
+    "quote": null
+  },
+  "allowances": {
+    "value": null,
+    "quote": null
+  },
+  "pay_day": {
+    "value": null,
+    "quote": null
+  },
+  "holidays": {
+    "value": null,
+    "quote": null
+  },
+  "annual_leave": {
+    "value": null,
+    "quote": null
+  },
+  "social_insurance": {
+    "value": null,
+    "quote": null
+  },
+  "penalty_or_damages_clause": {
+    "value": null,
+    "quote": null
+  }
+}
