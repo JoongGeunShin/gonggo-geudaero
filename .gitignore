@@ -26,5 +26,5 @@ Thumbs.db
 # 업로드 파일
 backend/uploads/
 
-# 문서
-DOCS/
+# 자체 개발 가이드
+공고그대로_MVP_개발가이드.md
