@@ -51,3 +51,10 @@ class Finding(BaseModel):
     posting_quote: Optional[str] = None    # 공고 쪽 근거 원문
     contract_quote: Optional[str] = None   # 계약서 쪽 근거 원문
     basis: str = ""                        # 법 조항 근거 (공고 대비 비교면 빈 값)
+
+
+class CompareRequest(BaseModel):
+    """POST /rules/compare 요청: 추출이 끝난 공고·계약서 JSON 한 쌍."""
+
+    posting: ConditionDoc
+    contract: ConditionDoc
