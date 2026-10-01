@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict
 
@@ -37,3 +37,17 @@ class ConditionDoc(BaseModel):
     annual_leave: ExtractedField = ExtractedField()                # 연차유급휴가 규정
     social_insurance: ExtractedField = ExtractedField()            # 4대보험 적용 여부
     penalty_or_damages_clause: ExtractedField = ExtractedField()   # 위약금·교육비 반환·손해배상 조항
+
+
+Level = Literal["불리 변경", "법 기준 확인", "누락", "모호", "동일·유리"]
+
+
+class Finding(BaseModel):
+    """공고 ↔ 계약서 비교 결과 한 건."""
+
+    level: Level
+    item: str                              # 비교 항목 (예: "수습", "임금(월 환산)")
+    message: str                           # 무엇이 어떻게 달라졌는지
+    posting_quote: Optional[str] = None    # 공고 쪽 근거 원문
+    contract_quote: Optional[str] = None   # 계약서 쪽 근거 원문
+    basis: str = ""                        # 법 조항 근거 (공고 대비 비교면 빈 값)
