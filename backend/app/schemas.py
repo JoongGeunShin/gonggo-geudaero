@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict
@@ -58,3 +59,23 @@ class CompareRequest(BaseModel):
 
     posting: ConditionDoc
     contract: ConditionDoc
+
+
+class PostingCreate(BaseModel):
+    """POST /postings 요청: 지금은 추출 결과 JSON을 직접 넣는 수동 입력만 받는다."""
+
+    source_type: Literal["capture", "url", "manual"] = "manual"
+    source_url: Optional[str] = None
+    raw_text: Optional[str] = None
+    extracted_json: ConditionDoc
+    company_name: Optional[str] = None
+    b_no: Optional[str] = None
+
+
+class PostingRead(PostingCreate):
+    """저장된 공고. DB 객체(models.Posting)에서 바로 만든다."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    created_at: datetime
