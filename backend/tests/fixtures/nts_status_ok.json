@@ -1,10 +1,10 @@
 {
-  "status_code": "OK",
   "request_cnt": 1,
   "match_cnt": 1,
+  "status_code": "OK",
   "data": [
     {
-      "b_no": "1234567890",
+      "b_no": "1248100998",
       "b_stt": "계속사업자",
       "b_stt_cd": "01",
       "tax_type": "부가가치세 일반과세자",
