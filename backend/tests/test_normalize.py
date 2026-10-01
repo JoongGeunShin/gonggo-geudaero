@@ -1,6 +1,6 @@
 import pytest
 
-from app.rules.normalize import monthly_paid_hours, weekly_hours
+from app.rules.normalize import monthly_paid_hours, monthly_wage, weekly_hours
 from app.schemas import ConditionDoc, ExtractedField
 
 
@@ -72,3 +72,55 @@ def test_result_is_rounded_to_one_decimal():
 ])
 def test_cannot_calculate_returns_none(values):
     assert weekly_hours(make_doc(**values)) is None
+
+
+# --- monthly_wage: 임금(시급·일급·월급·연봉) → 월 임금 ---
+
+def wage_doc(type_, amount_min, amount_max=None, **values):
+    """임금 항목을 채운 문서. amount_max를 생략하면 amount_min과 같은 값(금액이 하나인 경우)."""
+    wage = {"type": type_, "amount_min": amount_min,
+            "amount_max": amount_min if amount_max is None else amount_max}
+    return make_doc(wage=wage, **values)
+
+
+def test_monthly_wage_as_is():
+    assert monthly_wage(wage_doc("월급", 2_500_000)) == 2_500_000
+
+
+def test_annual_wage_divided_by_12():
+    assert monthly_wage(wage_doc("연봉", 30_000_000)) == 2_500_000
+
+
+def test_annual_range_uses_min_by_default_and_max_on_request():
+    # 경계값: "연봉 3,000~3,600만원" 같은 범위 공고 → 기본은 최저액(근로자에게 보수적으로)
+    doc = wage_doc("연봉", 30_000_000, 36_000_000)
+    assert monthly_wage(doc) == 2_500_000
+    assert monthly_wage(doc, use_min=False) == 3_000_000
+
+
+def test_missing_max_falls_back_to_min():
+    doc = make_doc(wage={"type": "월급", "amount_min": 2_500_000})
+    assert monthly_wage(doc, use_min=False) == 2_500_000
+
+
+def test_hourly_wage_uses_monthly_paid_hours():
+    # 2026 최저시급 10,320원 × 주 40시간(월 약 209시간)
+    doc = wage_doc("시급", 10_320, start_time="09:00", end_time="18:00",
+                   break_minutes=60, work_days_per_week=5)
+    assert monthly_wage(doc) == pytest.approx(10_320 * 48 * 4.345)
+
+
+def test_daily_wage_times_days():
+    doc = wage_doc("일급", 100_000, work_days_per_week=5)
+    assert monthly_wage(doc) == pytest.approx(100_000 * 5 * 4.345)
+
+
+@pytest.mark.parametrize("doc", [
+    make_doc(),                                                 # 임금 항목 자체가 없음
+    make_doc(wage={"type": "비공개", "amount_min": None, "amount_max": None}),  # 경계값: "회사 내규에 따름"
+    wage_doc("월급", 0),                                        # 금액 0
+    wage_doc("시급", 10_320),                                   # 근무시간을 몰라 월 환산 불가
+    wage_doc("일급", 100_000),                                  # 근무일수를 몰라 월 환산 불가
+])
+def test_cannot_calculate_wage_returns_none(doc):
+    assert monthly_wage(doc) is None
