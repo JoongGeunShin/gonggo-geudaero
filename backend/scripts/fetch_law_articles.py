@@ -62,7 +62,9 @@ def fetch_article(client: httpx.Client, mst: str, article: str) -> dict:
     lines = [_text(unit.get("조문내용"))]
     for hang in _as_list(unit.get("항")):
         lines.append(_text(hang.get("항내용")))
-        lines += [_text(ho.get("호내용")) for ho in _as_list(hang.get("호"))]
+        for ho in _as_list(hang.get("호")):
+            lines.append(_text(ho.get("호내용")))
+            lines += [_text(mok.get("목내용")) for mok in _as_list(ho.get("목"))]
     return {
         "law": info["법령명_한글"],
         "article": article,
