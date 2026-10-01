@@ -4,13 +4,14 @@
 판정은 전부 코드가 하고, LLM은 쓰지 않는다.
 """
 
+from app.external.min_wage import load_min_wage
 from app.rules.normalize import base_hourly, monthly_wage, weekly_hours
 from app.schemas import ConditionDoc, Finding
 
 RED, AMBER, YELLOW, GRAY, GREEN = "불리 변경", "법 기준 확인", "누락", "모호", "동일·유리"
 
-# 연도별 최저시급 — Phase 4-A에서 공공데이터포털 '고용노동부_연도별 최저임금' CSV로 교체
-MIN_WAGE = {2025: 10030, 2026: 10320}
+# 연도별 최저시급 — 공공데이터포털 '고용노동부_연도별 최저임금' CSV (서버 시작 시 한 번 읽음)
+MIN_WAGE = load_min_wage()
 YEAR = 2026
 
 
