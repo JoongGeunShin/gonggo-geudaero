@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 from app.config import settings
 
@@ -11,6 +11,10 @@ connect_args = {"check_same_thread": False} if settings.database_url.startswith(
 
 engine = create_engine(settings.database_url, connect_args=connect_args)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
+
+
+class Base(DeclarativeBase):
+    """모든 테이블 모델의 부모. Alembic은 Base.metadata를 보고 테이블을 비교한다."""
 
 
 def get_db() -> Iterator[Session]:
