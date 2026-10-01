@@ -56,3 +56,14 @@ def monthly_wage(doc: ConditionDoc, use_min=True):
         days = doc.work_days_per_week.value
         return amt * days * WEEKS_PER_MONTH if isinstance(days, (int, float)) else None
     return None
+
+
+def base_hourly(doc: ConditionDoc):
+    """포괄임금에 포함된 연장근로(1.5배)를 떼어낸 기본 시급."""
+    mw = monthly_wage(doc)
+    hrs = monthly_paid_hours(weekly_hours(doc))
+    if not mw or not hrs:
+        return None
+    cw = doc.comprehensive_wage.value or {}
+    ot = (cw.get("overtime_hours_per_month") or 0) if cw.get("included") else 0
+    return mw / (hrs + ot * 1.5)
