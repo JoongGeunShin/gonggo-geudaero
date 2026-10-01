@@ -1,6 +1,6 @@
 import pytest
 
-from app.rules.normalize import monthly_paid_hours, monthly_wage, weekly_hours
+from app.rules.normalize import base_hourly, monthly_paid_hours, monthly_wage, weekly_hours
 from app.schemas import ConditionDoc, ExtractedField
 
 
@@ -124,3 +124,48 @@ def test_daily_wage_times_days():
 ])
 def test_cannot_calculate_wage_returns_none(doc):
     assert monthly_wage(doc) is None
+
+
+# --- base_hourly: 포괄임금 속 연장근로수당을 떼어낸 기본 시급 ---
+
+FULL_TIME = {"start_time": "09:00", "end_time": "18:00", "break_minutes": 60, "work_days_per_week": 5}
+PAID_HOURS_40H = 48 * 4.345  # 주 40시간의 월 유급시간 ≈ 208.6
+
+
+def test_base_hourly_without_comprehensive_wage():
+    doc = wage_doc("월급", 2_500_000, **FULL_TIME)
+    assert base_hourly(doc) == pytest.approx(2_500_000 / PAID_HOURS_40H)
+
+
+def test_comprehensive_overtime_counts_1_5_times():
+    # 월 20시간 연장근로가 포함된 포괄임금 → 분모에 20 × 1.5 = 30시간 추가
+    doc = wage_doc("월급", 2_500_000, **FULL_TIME,
+                   comprehensive_wage={"included": True, "overtime_hours_per_month": 20})
+    assert base_hourly(doc) == pytest.approx(2_500_000 / (PAID_HOURS_40H + 30))
+
+
+def test_comprehensive_not_included_is_ignored():
+    doc = wage_doc("월급", 2_500_000, **FULL_TIME,
+                   comprehensive_wage={"included": False, "overtime_hours_per_month": 20})
+    assert base_hourly(doc) == pytest.approx(2_500_000 / PAID_HOURS_40H)
+
+
+def test_comprehensive_without_hours_adds_nothing():
+    # 경계값: "포괄임금"이라고만 적히고 시간 수가 없음 → 뺄 수 있는 연장근로 없음
+    doc = wage_doc("월급", 2_500_000, **FULL_TIME,
+                   comprehensive_wage={"included": True, "overtime_hours_per_month": None})
+    assert base_hourly(doc) == pytest.approx(2_500_000 / PAID_HOURS_40H)
+
+
+def test_hourly_wage_round_trips():
+    # 시급 → 월 환산 → 다시 시급: 원래 시급으로 돌아와야 함
+    doc = wage_doc("시급", 10_320, **FULL_TIME)
+    assert base_hourly(doc) == pytest.approx(10_320)
+
+
+@pytest.mark.parametrize("doc", [
+    make_doc(wage={"type": "비공개", "amount_min": None, "amount_max": None}, **FULL_TIME),  # 임금 모름
+    wage_doc("월급", 2_500_000),                                                          # 근무시간 모름
+])
+def test_cannot_calculate_base_hourly_returns_none(doc):
+    assert base_hourly(doc) is None
