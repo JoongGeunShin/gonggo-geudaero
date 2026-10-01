@@ -51,6 +51,12 @@ def test_empty_data_returns_none(with_key):
     assert get_business_status("1234567890") is None
 
 
+@pytest.mark.parametrize("b_no", ["123456789", "12345678901", "123-45-6789a", ""])
+def test_invalid_number_raises(b_no):
+    with pytest.raises(ValueError):
+        get_business_status(b_no)
+
+
 @respx.mock
 def test_missing_key_returns_none_without_calling(monkeypatch):
     monkeypatch.setattr(settings, "nts_service_key", "")
