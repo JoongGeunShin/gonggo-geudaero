@@ -36,3 +36,23 @@ def monthly_paid_hours(wh):
         return None
     weekly_holiday = wh / 5 if wh >= 15 else 0  # 주 15시간 이상이면 주휴 발생
     return (min(wh, 40) + min(weekly_holiday, 8)) * WEEKS_PER_MONTH
+
+
+def monthly_wage(doc: ConditionDoc, use_min=True):
+    """임금을 월 단위로 환산. 범위 공고는 기본으로 최저액, use_min=False면 최고액."""
+    w = doc.wage.value or {}
+    t = w.get("type")
+    amt = w.get("amount_min" if use_min else "amount_max") or w.get("amount_min")
+    if not t or t == "비공개" or not amt:
+        return None
+    if t == "월급":
+        return amt
+    if t == "연봉":
+        return amt / 12
+    if t == "시급":
+        hrs = monthly_paid_hours(weekly_hours(doc))
+        return amt * hrs if hrs else None
+    if t == "일급":
+        days = doc.work_days_per_week.value
+        return amt * days * WEEKS_PER_MONTH if isinstance(days, (int, float)) else None
+    return None
