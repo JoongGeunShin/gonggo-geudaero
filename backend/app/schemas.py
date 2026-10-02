@@ -9,6 +9,7 @@ class ExtractedField(BaseModel):
 
     value: Any = None
     quote: Optional[str] = None
+    verification: Optional[Literal["quote_not_found", "quote_missing"]] = None   # 인용 검증에서 값이 버려진 이유
 
 
 class ConditionDoc(BaseModel):
