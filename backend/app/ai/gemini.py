@@ -6,6 +6,7 @@
 import time
 from typing import Callable
 
+import httpx
 from google import genai
 from google.genai import errors, types
 from pydantic import ValidationError
@@ -20,7 +21,7 @@ DOC_KIND_LABEL ={"posting": "채용공고", "contract": "근로계약서", "pays
 
 RETRYABLE_CODES = {429, 500, 503}   # 한도 초과·일시적 서버 오류만 다시 시도
 FIRST_WAIT_SECONDS = 10
-TIMEOUT_MS = 90_000
+TIMEOUT_MS = 120_000   # 이미지 한 장 추출에 1분 넘게 걸리기도 한다
 
 
 def _nullable(schema: dict) -> dict:
@@ -120,3 +121,9 @@ class GeminiExtractor:
                     wait *= 2
                     continue
                 raise ExtractionError(f"Gemini 호출 실패 ({e.code}): {e.message}") from e
+            except httpx.TimeoutException as e:   # 타임아웃은 APIError가 아니라 httpx 예외로 온다
+                if attempt < self.max_retries:
+                    self.sleep(wait)
+                    wait *= 2
+                    continue
+                raise ExtractionError(f"Gemini 응답 시간 초과 ({TIMEOUT_MS // 1000}초)") from e
