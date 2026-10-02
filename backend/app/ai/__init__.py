@@ -8,5 +8,9 @@ def get_extractor() -> ExtractorProvider:
     if provider == "mock":
         from app.ai.mock import MockExtractor
         return MockExtractor()
-    # gemini(Step 6-4)는 구현하면서 여기에 추가한다
+    if provider == "gemini":
+        if not settings.gemini_api_key or not settings.gemini_model:
+            raise ValueError("AI_PROVIDER=gemini에는 GEMINI_API_KEY와 GEMINI_MODEL이 필요합니다")
+        from app.ai.gemini import GeminiExtractor
+        return GeminiExtractor(api_key=settings.gemini_api_key, model=settings.gemini_model)
     raise ValueError(f"지원하지 않는 AI_PROVIDER: {provider}")
