@@ -20,6 +20,17 @@ class ExtractorProvider(Protocol):
     def extract(self, image_bytes: bytes, media_type: str, doc_kind: DocKind) -> ExtractionResult: ...
 
 
+class OcrProvider(Protocol):
+    """이미지 → 원문 글자만. 인용 검증의 기준 원문을 어디서 얻을지 바꿔 끼우는 자리.
+
+    1단계(MVP): 별도 OCR 없이 ExtractionResult.full_text(추출과 같은 Gemini 호출)를 기준으로 쓴다.
+    2단계: 이 인터페이스로 OCR을 따로 호출해 그 원문으로 검증한다 (같은 모델끼리의 일관성 검사 한계 보완).
+    3단계: Tesseract 같은 독립 OCR 구현을 끼운다.
+    """
+
+    def read_text(self, image_bytes: bytes, media_type: str) -> str: ...
+
+
 class ExplainerProvider(Protocol):
     """판정 결과를 사람이 읽을 설명으로 바꾼다 (Phase 9)."""
 
