@@ -14,7 +14,9 @@ from app.ai.base import DocKind, ExtractionResult
 from app.ai.prompts import EXTRACT_PROMPT_VERSION, load_prompt
 from app.schemas import ConditionDoc
 
-DOC_KIND_LABEL = {"posting": "채용공고", "contract": "근로계약서", "payslip": "임금명세서"}
+OCR_ONLY_PROMPT = ("이 문서 이미지의 모든 글자를 위에서 아래로, 줄바꿈까지 그대로 옮겨 적어줘. "
+                   "표는 한 행을 한 줄로 쓰고 칸 사이는 ' | '로 구분해. 설명은 쓰지 마.")
+DOC_KIND_LABEL ={"posting": "채용공고", "contract": "근로계약서", "payslip": "임금명세서"}
 
 RETRYABLE_CODES = {429, 500, 503}   # 한도 초과·일시적 서버 오류만 다시 시도
 FIRST_WAIT_SECONDS = 10
@@ -99,6 +101,11 @@ class GeminiExtractor:
             except ValidationError as e:
                 last_error = e
         raise ExtractionError(f"Gemini 응답이 추출 스키마에 맞지 않습니다: {last_error}")
+
+    def read_text(self, image_bytes: bytes, media_type: str) -> str:
+        """OCR만 따로 호출 (OcrProvider). MVP에서는 extract()의 full_text를 쓰고, 2단계에서 이걸로 바꾼다."""
+        contents = [types.Part.from_bytes(data=image_bytes, mime_type=media_type), OCR_ONLY_PROMPT]
+        return self._call(contents, types.GenerateContentConfig(temperature=0)) or ""
 
     def _call(self, contents, config) -> str | None:
         """429·5xx면 10초, 20초, 40초… 기다렸다 다시 시도 (지수 백오프)."""

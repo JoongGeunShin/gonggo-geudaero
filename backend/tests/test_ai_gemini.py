@@ -183,3 +183,17 @@ def test_client_errors_are_not_retried():
     assert len(models.calls) == 1
     assert sleeps == []
 
+
+
+# --- OCR만 (OcrProvider, Step 6-5 2단계용) ---
+
+def test_read_text_returns_plain_text_without_schema():
+    extractor, models, _ = make(["원문 그대로"])
+    assert extractor.read_text(b"img", "image/png") == "원문 그대로"
+    assert models.calls[0]["config"].response_json_schema is None
+
+
+def test_read_text_backs_off_too():
+    extractor, _, sleeps = make([api_error(429), "원문"])
+    assert extractor.read_text(b"img", "image/png") == "원문"
+    assert sleeps == [10]
