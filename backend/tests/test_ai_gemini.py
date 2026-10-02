@@ -197,3 +197,11 @@ def test_read_text_backs_off_too():
     extractor, _, sleeps = make([api_error(429), "원문"])
     assert extractor.read_text(b"img", "image/png") == "원문"
     assert sleeps == [10]
+
+
+def test_timeout_is_retried_then_reported_as_extraction_error():
+    import httpx
+    extractor, models, sleeps = make([httpx.ReadTimeout("slow")] * 3, max_retries=2)
+    with pytest.raises(ExtractionError, match="시간 초과"):
+        extractor.extract(b"img", "image/png", "contract")
+    assert sleeps == [10, 20]
