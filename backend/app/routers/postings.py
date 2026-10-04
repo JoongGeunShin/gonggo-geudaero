@@ -7,9 +7,9 @@ from app.ai import get_extractor
 from app.ai.base import ExtractionError, ExtractorProvider
 from app.db import get_db
 from app.models import Posting
-from app.schemas import PostingCreate, PostingRead
+from app.schemas import BusinessCheckRequest, PostingCreate, PostingRead
 from app.services.extraction import MAX_UPLOAD_BYTES, UploadRejected
-from app.services.postings import create_posting_from_upload
+from app.services.postings import check_business, create_posting_from_upload
 
 router = APIRouter(prefix="/postings", tags=["postings"])
 
@@ -42,9 +42,19 @@ def extract_posting(
         raise HTTPException(status_code=502, detail=str(e))   # 우리 서버가 아니라 AI 쪽 실패
 
 
-@router.get("/{posting_id}", response_model=PostingRead)
-def read_posting(posting_id: int, db: Session = Depends(get_db)):
+def get_posting_or_404(db: Session, posting_id: int) -> Posting:
     posting = db.get(Posting, posting_id)
     if posting is None:
         raise HTTPException(status_code=404, detail=f"공고를 찾을 수 없음: {posting_id}")
     return posting
+
+
+@router.get("/{posting_id}", response_model=PostingRead)
+def read_posting(posting_id: int, db: Session = Depends(get_db)):
+    return get_posting_or_404(db, posting_id)
+
+
+@router.post("/{posting_id}/business-check", response_model=PostingRead)
+def business_check(posting_id: int, req: BusinessCheckRequest, db: Session = Depends(get_db)):
+    """사업자번호(선택 입력)로 국세청 휴·폐업 상태를 조회해 공고에 저장한다."""
+    return check_business(db, get_posting_or_404(db, posting_id), req.b_no)

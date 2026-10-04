@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any, Literal, Optional
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_validator
 
 
 class ExtractedField(BaseModel):
@@ -80,3 +80,18 @@ class PostingRead(PostingCreate):
 
     id: int
     created_at: datetime
+    nts_status_json: Optional[dict] = None   # 국세청 상태조회 응답 (null = 조회 안 함 또는 확인 불가)
+
+
+class BusinessCheckRequest(BaseModel):
+    """POST /postings/{id}/business-check 요청."""
+
+    b_no: str   # 사업자등록번호, 하이픈 있어도 됨
+
+    @field_validator("b_no")
+    @classmethod
+    def ten_digits(cls, v: str) -> str:
+        v = v.replace("-", "").strip()
+        if len(v) != 10 or not v.isdigit():
+            raise ValueError("사업자등록번호는 숫자 10자리")
+        return v
