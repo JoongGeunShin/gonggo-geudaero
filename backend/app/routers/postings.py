@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from typing import Optional
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
@@ -13,6 +14,17 @@ from app.services.extraction import MAX_UPLOAD_BYTES, UploadRejected
 from app.services.postings import check_business, create_posting_from_upload
 
 router = APIRouter(prefix="/postings", tags=["postings"])
+
+
+@contextmanager
+def upload_errors_as_http():
+    """업로드·추출 흐름의 에러를 HTTP 응답으로 바꾼다."""
+    try:
+        yield
+    except UploadRejected as e:
+        raise HTTPException(status_code=e.status_code, detail=e.detail)
+    except ExtractionError as e:
+        raise HTTPException(status_code=502, detail=str(e))   # 우리 서버가 아니라 AI 쪽 실패
 
 
 @router.post("", response_model=PostingRead, status_code=201)
@@ -35,12 +47,8 @@ def extract_posting(
 ):
     """공고 이미지 업로드 → 추출 → 인용검증 → 마스킹 → 저장."""
     data = file.file.read(MAX_UPLOAD_BYTES + 1)   # 한도+1까지만 읽어서 초과 여부만 안다
-    try:
+    with upload_errors_as_http():
         return create_posting_from_upload(db, extractor, data, file.content_type, source_url)
-    except UploadRejected as e:
-        raise HTTPException(status_code=e.status_code, detail=e.detail)
-    except ExtractionError as e:
-        raise HTTPException(status_code=502, detail=str(e))   # 우리 서버가 아니라 AI 쪽 실패
 
 
 def get_posting_or_404(db: Session, posting_id: int) -> Posting:
@@ -73,9 +81,5 @@ def compare_contract(
     if posting.extracted_json is None:
         raise HTTPException(status_code=409, detail="공고 추출 결과가 없어 비교할 수 없음")
     data = file.file.read(MAX_UPLOAD_BYTES + 1)
-    try:
+    with upload_errors_as_http():
         return compare_with_contract_upload(db, extractor, posting, data, file.content_type)
-    except UploadRejected as e:
-        raise HTTPException(status_code=e.status_code, detail=e.detail)
-    except ExtractionError as e:
-        raise HTTPException(status_code=502, detail=str(e))
