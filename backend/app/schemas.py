@@ -83,6 +83,19 @@ class PostingRead(PostingCreate):
     nts_status_json: Optional[dict] = None   # 국세청 상태조회 응답 (null = 조회 안 함 또는 확인 불가)
 
 
+class ComparisonRead(BaseModel):
+    """저장된 대조 결과. DB 객체(models.Comparison)에서 바로 만든다."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    posting_id: int
+    document_id: int
+    findings_json: list[Finding]
+    explanation_json: Optional[dict] = None   # Phase 9 설명 단계에서 채움
+    created_at: datetime
+
+
 class BusinessCheckRequest(BaseModel):
     """POST /postings/{id}/business-check 요청."""
 

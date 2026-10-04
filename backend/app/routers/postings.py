@@ -7,7 +7,8 @@ from app.ai import get_extractor
 from app.ai.base import ExtractionError, ExtractorProvider
 from app.db import get_db
 from app.models import Posting
-from app.schemas import BusinessCheckRequest, PostingCreate, PostingRead
+from app.schemas import BusinessCheckRequest, ComparisonRead, PostingCreate, PostingRead
+from app.services.comparisons import compare_with_contract_upload
 from app.services.extraction import MAX_UPLOAD_BYTES, UploadRejected
 from app.services.postings import check_business, create_posting_from_upload
 
@@ -58,3 +59,23 @@ def read_posting(posting_id: int, db: Session = Depends(get_db)):
 def business_check(posting_id: int, req: BusinessCheckRequest, db: Session = Depends(get_db)):
     """사업자번호(선택 입력)로 국세청 휴·폐업 상태를 조회해 공고에 저장한다."""
     return check_business(db, get_posting_or_404(db, posting_id), req.b_no)
+
+
+@router.post("/{posting_id}/compare", response_model=ComparisonRead, status_code=201)
+def compare_contract(
+    posting_id: int,
+    file: UploadFile = File(..., description="근로계약서 (jpg·png·pdf, 10MB 이하)"),
+    db: Session = Depends(get_db),
+    extractor: ExtractorProvider = Depends(get_extractor),
+):
+    """계약서 이미지 업로드 → 추출 → 규칙 판정 → 저장 → 결과 반환."""
+    posting = get_posting_or_404(db, posting_id)
+    if posting.extracted_json is None:
+        raise HTTPException(status_code=409, detail="공고 추출 결과가 없어 비교할 수 없음")
+    data = file.file.read(MAX_UPLOAD_BYTES + 1)
+    try:
+        return compare_with_contract_upload(db, extractor, posting, data, file.content_type)
+    except UploadRejected as e:
+        raise HTTPException(status_code=e.status_code, detail=e.detail)
+    except ExtractionError as e:
+        raise HTTPException(status_code=502, detail=str(e))
