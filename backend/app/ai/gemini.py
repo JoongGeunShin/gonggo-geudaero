@@ -11,7 +11,7 @@ from google import genai
 from google.genai import errors, types
 from pydantic import ValidationError
 
-from app.ai.base import DocKind, ExtractionResult
+from app.ai.base import DocKind, ExtractionError, ExtractionResult
 from app.ai.prompts import EXTRACT_PROMPT_VERSION, load_prompt
 from app.schemas import ConditionDoc
 
@@ -67,10 +67,6 @@ def response_schema() -> dict:
         "properties": {"full_text": _STR, "fields": {"type": "object", "properties": fields}},
         "required": ["full_text", "fields"],
     }
-
-
-class ExtractionError(RuntimeError):
-    """추출 실패를 라우터에서 한 종류로 잡을 수 있게 감싼 에러."""
 
 
 class GeminiExtractor:
