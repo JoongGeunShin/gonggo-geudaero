@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import health, laws, postings, rules
+from app.routers import comparisons, health, laws, postings, rules
 
 app = FastAPI(title="공고그대로 API", version="0.1.0")
 
@@ -18,3 +18,4 @@ app.include_router(health.router)
 app.include_router(rules.router)
 app.include_router(laws.router)
 app.include_router(postings.router)
+app.include_router(comparisons.router)
