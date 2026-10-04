@@ -16,6 +16,10 @@ class ExtractionResult(BaseModel):
     fields: ConditionDoc = ConditionDoc()   # 스키마에 맞춘 추출 값
 
 
+class ExtractionError(RuntimeError):
+    """추출 실패. 구현(Gemini·엔노이아)과 상관없이 라우터에서 이 한 종류로 잡는다."""
+
+
 class ExtractorProvider(Protocol):
     def extract(self, image_bytes: bytes, media_type: str, doc_kind: DocKind) -> ExtractionResult: ...
 
