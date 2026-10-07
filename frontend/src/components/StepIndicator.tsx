@@ -24,8 +24,11 @@ export default function StepIndicator({ current }: Props) {
             >
               {done ? "✓" : step}
             </span>
+            {/* 모바일에서는 현재 단계 이름만 보여서 줄바꿈을 막는다 */}
             <span
-              className={`text-sm ${active ? "font-bold text-text" : "text-sub"}`}
+              className={`whitespace-nowrap text-sm ${
+                active ? "font-bold text-text" : "hidden text-sub sm:inline"
+              }`}
             >
               {label}
             </span>
