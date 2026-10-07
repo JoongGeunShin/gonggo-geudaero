@@ -57,12 +57,24 @@ export type Posting = {
   nts_status_json: Record<string, unknown> | null;
 };
 
+// 판정 결과 한 건의 쉬운 말 설명 + 사업주에게 물어볼 질문 (item으로 Finding과 짝을 맞춘다)
+export type ExplanationItem = {
+  item: string;
+  summary: string;
+  question: string;
+};
+
+export type Explanation = {
+  prompt_version: string; // explain_v1 = Gemini, template_v1 = 고정 문구
+  items: ExplanationItem[];
+};
+
 export type Comparison = {
   id: number;
   posting_id: number;
   document_id: number;
   findings_json: Finding[];
-  explanation_json: Record<string, unknown> | null;
+  explanation_json: Explanation | null; // Phase 9 이전에 만든 결과는 null
   created_at: string;
 };
 

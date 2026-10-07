@@ -78,7 +78,7 @@ export default async function ComparisonPage({ params }: PageProps<"/comparisons
 
         <div>
           <ColumnTitle no="③">서명 전 확인</ColumnTitle>
-          <CheckPanel findings={findings} />
+          <CheckPanel findings={findings} explanation={comparison.explanation_json} />
         </div>
       </div>
 
