@@ -69,6 +69,27 @@ def response_schema() -> dict:
     }
 
 
+def generate_with_retry(client, model: str, contents, config, *, max_retries: int,
+                        sleep: Callable[[float], None], error: type[Exception]) -> str | None:
+    """429·5xx·타임아웃이면 10초, 20초, 40초… 기다렸다 다시 시도 (지수 백오프). 끝내 실패하면 error로 바꿔 던진다."""
+    wait = FIRST_WAIT_SECONDS
+    for attempt in range(max_retries + 1):
+        try:
+            return client.models.generate_content(model=model, contents=contents, config=config).text
+        except errors.APIError as e:
+            if e.code in RETRYABLE_CODES and attempt < max_retries:
+                sleep(wait)
+                wait *= 2
+                continue
+            raise error(f"Gemini 호출 실패 ({e.code}): {e.message}") from e
+        except httpx.TimeoutException as e:   # 타임아웃은 APIError가 아니라 httpx 예외로 온다
+            if attempt < max_retries:
+                sleep(wait)
+                wait *= 2
+                continue
+            raise error("Gemini 응답 시간 초과") from e
+
+
 class GeminiExtractor:
     def __init__(self, client=None, model: str = "", api_key: str = "",
                  max_retries: int = 3, sleep: Callable[[float], None] = time.sleep):
@@ -105,21 +126,5 @@ class GeminiExtractor:
         return self._call(contents, types.GenerateContentConfig(temperature=0)) or ""
 
     def _call(self, contents, config) -> str | None:
-        """429·5xx면 10초, 20초, 40초… 기다렸다 다시 시도 (지수 백오프)."""
-        wait = FIRST_WAIT_SECONDS
-        for attempt in range(self.max_retries + 1):
-            try:
-                return self.client.models.generate_content(
-                    model=self.model, contents=contents, config=config).text
-            except errors.APIError as e:
-                if e.code in RETRYABLE_CODES and attempt < self.max_retries:
-                    self.sleep(wait)
-                    wait *= 2
-                    continue
-                raise ExtractionError(f"Gemini 호출 실패 ({e.code}): {e.message}") from e
-            except httpx.TimeoutException as e:   # 타임아웃은 APIError가 아니라 httpx 예외로 온다
-                if attempt < self.max_retries:
-                    self.sleep(wait)
-                    wait *= 2
-                    continue
-                raise ExtractionError(f"Gemini 응답 시간 초과 ({TIMEOUT_MS // 1000}초)") from e
+        return generate_with_retry(self.client, self.model, contents, config,
+                                   max_retries=self.max_retries, sleep=self.sleep, error=ExtractionError)
