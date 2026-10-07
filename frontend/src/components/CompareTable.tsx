@@ -1,4 +1,5 @@
 import FindingBadge from "@/components/FindingBadge";
+import LawBasis from "@/components/LawBasis";
 import type { Finding } from "@/lib/api";
 
 function Quote({ text, empty }: { text: string | null; empty: string }) {
@@ -29,9 +30,7 @@ export default function CompareTable({ findings }: Props) {
               <th scope="row" className="px-4 py-3 font-normal">
                 <p className="font-bold">{f.item}</p>
                 <p className="mt-1 text-text">{f.message}</p>
-                {f.basis && (
-                  <p className="mt-1 text-xs text-sub">근거: {f.basis}</p>
-                )}
+                {f.basis && <LawBasis basis={f.basis} />}
               </th>
               <td className="px-4 py-3">
                 <Quote text={f.posting_quote} empty="공고에 없음" />
