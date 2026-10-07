@@ -3,7 +3,7 @@ import StepIndicator from "@/components/StepIndicator";
 
 export default function Home() {
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6">
       <StepIndicator current={1} />
       <div>
         <h1 className="text-2xl font-bold">지원한 공고를 저장하세요</h1>

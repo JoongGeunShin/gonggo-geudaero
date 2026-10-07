@@ -26,7 +26,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <Header />
-        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+        {/* 결과 3단 화면이 들어가도록 넓게. 입력 화면은 각 페이지에서 좁힌다 */}
+        <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8">
           {children}
         </main>
       </body>
