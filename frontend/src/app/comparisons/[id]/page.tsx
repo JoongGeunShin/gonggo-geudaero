@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import CheckPanel from "@/components/CheckPanel";
 import CompareTable from "@/components/CompareTable";
 import ConditionCard from "@/components/ConditionCard";
+import Disclaimer from "@/components/Disclaimer";
 import FindingSummary from "@/components/FindingSummary";
 import StepIndicator from "@/components/StepIndicator";
 import { ApiError, getComparison, getPosting, LEVELS, type Comparison, type Posting } from "@/lib/api";
@@ -80,6 +81,8 @@ export default async function ComparisonPage({ params }: PageProps<"/comparisons
           <CheckPanel findings={findings} />
         </div>
       </div>
+
+      <Disclaimer />
     </div>
   );
 }
