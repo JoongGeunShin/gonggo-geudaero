@@ -23,7 +23,7 @@ export default async function PostingPage({ params }: PageProps<"/postings/[id]"
   }
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6">
       <StepIndicator current={2} />
       <div>
         <h1 className="text-2xl font-bold">받은 근로계약서를 올려 주세요</h1>
