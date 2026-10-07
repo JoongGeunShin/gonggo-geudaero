@@ -55,6 +55,21 @@ class Finding(BaseModel):
     basis: str = ""                        # 법 조항 근거 (공고 대비 비교면 빈 값)
 
 
+class ExplanationItem(BaseModel):
+    """판정 결과 한 건의 쉬운 말 설명 + 사업주에게 물어볼 질문."""
+
+    item: str        # Finding.item과 같은 값 (화면에서 이걸로 짝을 맞춘다)
+    summary: str     # 쉬운 말 설명
+    question: str    # 정중한 존댓말 질문 한 문장
+
+
+class Explanation(BaseModel):
+    """설명 단계의 결과. '동일·유리'를 뺀 판정 결과마다 하나씩."""
+
+    prompt_version: str                 # 어떤 프롬프트(또는 고정 문구)로 만들었는지
+    items: list[ExplanationItem] = []
+
+
 class CompareRequest(BaseModel):
     """POST /rules/compare 요청: 추출이 끝난 공고·계약서 JSON 한 쌍."""
 
@@ -92,7 +107,7 @@ class ComparisonRead(BaseModel):
     posting_id: int
     document_id: int
     findings_json: list[Finding]
-    explanation_json: Optional[dict] = None   # Phase 9 설명 단계에서 채움
+    explanation_json: Optional[Explanation] = None   # 설명 단계 결과 (Phase 9 이전 결과는 null)
     created_at: datetime
 
 
