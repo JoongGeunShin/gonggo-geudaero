@@ -1,19 +1,24 @@
-"""Gemini 추출기: 이미지 한 장을 한 번 호출해서 ① OCR 원문(full_text)과 ② 스키마에 맞춘 fields를 같이 받는다.
+"""Gemini 구현.
+
+- GeminiExtractor: 이미지 한 장을 한 번 호출해서 ① OCR 원문(full_text)과 ② 스키마에 맞춘 fields를 같이 받는다.
+- GeminiExplainer: 판정 결과(글자만)를 보내 쉬운 말 설명과 질문을 받는다.
 
 무료 티어 입력은 Google 제품 개선에 쓰일 수 있으므로 실제 계약서는 넣지 말고 합성 샘플만 쓸 것.
 """
 
+import json
 import time
 from typing import Callable
 
 import httpx
 from google import genai
 from google.genai import errors, types
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
-from app.ai.base import DocKind, ExtractionError, ExtractionResult
-from app.ai.prompts import EXTRACT_PROMPT_VERSION, load_prompt
-from app.schemas import ConditionDoc
+from app.ai.base import DocKind, ExplanationError, ExtractionError, ExtractionResult
+from app.ai.mock import template_item, to_explain
+from app.ai.prompts import EXPLAIN_PROMPT_VERSION, EXTRACT_PROMPT_VERSION, load_prompt
+from app.schemas import ConditionDoc, Explanation, ExplanationItem, Finding
 
 OCR_ONLY_PROMPT = ("이 문서 이미지의 모든 글자를 위에서 아래로, 줄바꿈까지 그대로 옮겨 적어줘. "
                    "표는 한 행을 한 줄로 쓰고 칸 사이는 ' | '로 구분해. 설명은 쓰지 마.")
@@ -128,3 +133,61 @@ class GeminiExtractor:
     def _call(self, contents, config) -> str | None:
         return generate_with_retry(self.client, self.model, contents, config,
                                    max_retries=self.max_retries, sleep=self.sleep, error=ExtractionError)
+
+
+EXPLAIN_TIMEOUT_MS = 60_000   # 이미지 없이 글자만 보내므로 추출보다 훨씬 빠르다
+
+
+def explain_schema() -> dict:
+    """설명 단계 구조화 출력 스키마. 받은 응답은 다시 _ExplainReply로 검증한다."""
+    item = {"type": "object", "properties": {"item": _STR, "summary": _STR, "question": _STR},
+            "required": ["item", "summary", "question"]}
+    return {"type": "object", "properties": {"items": {"type": "array", "items": item}},
+            "required": ["items"]}
+
+
+class _ExplainReply(BaseModel):
+    items: list[ExplanationItem]
+
+
+def align(targets: list[Finding], items: list[ExplanationItem]) -> list[ExplanationItem]:
+    """판정 결과 순서대로 짝을 맞춘다. 모델이 빠뜨리거나 item 이름을 바꾼 항목은 고정 문구로 채운다."""
+    by_item = {i.item: i for i in items}
+    return [by_item.get(f.item) or template_item(f) for f in targets]
+
+
+class GeminiExplainer:
+    """판정 결과(findings) JSON만 보내 설명·질문을 받는다. 이미지·원문은 보내지 않는다."""
+
+    def __init__(self, client=None, model: str = "", api_key: str = "",
+                 max_retries: int = 1, sleep: Callable[[float], None] = time.sleep):
+        # 설명은 실패해도 고정 문구로 대신하므로, 대조 응답이 너무 늦어지지 않게 재시도는 짧게
+        self.client = client or genai.Client(
+            api_key=api_key, http_options=types.HttpOptions(timeout=EXPLAIN_TIMEOUT_MS))
+        self.model = model
+        self.max_retries = max_retries
+        self.sleep = sleep
+        self.prompt = load_prompt(EXPLAIN_PROMPT_VERSION)
+
+    def explain(self, findings: list[Finding]) -> Explanation:
+        targets = to_explain(findings)
+        if not targets:   # 물어볼 게 없으면 호출하지 않는다
+            return Explanation(prompt_version=EXPLAIN_PROMPT_VERSION)
+        payload = json.dumps([f.model_dump() for f in targets], ensure_ascii=False, indent=1)
+        contents = [f"{self.prompt}\n\n## 판정 결과\n{payload}"]
+        config = types.GenerateContentConfig(
+            temperature=0,
+            response_mime_type="application/json",
+            response_json_schema=explain_schema(),
+        )
+        last_error: Exception | None = None
+        for _ in range(2):   # 스키마에 안 맞으면 1회만 다시 요청
+            text = generate_with_retry(self.client, self.model, contents, config,
+                                       max_retries=self.max_retries, sleep=self.sleep, error=ExplanationError)
+            try:
+                reply = _ExplainReply.model_validate_json(text or "")
+            except ValidationError as e:
+                last_error = e
+                continue
+            return Explanation(prompt_version=EXPLAIN_PROMPT_VERSION, items=align(targets, reply.items))
+        raise ExplanationError(f"Gemini 응답이 설명 스키마에 맞지 않습니다: {last_error}")
