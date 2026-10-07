@@ -18,6 +18,7 @@ from pydantic import BaseModel, ValidationError
 from app.ai.base import DocKind, ExplanationError, ExtractionError, ExtractionResult
 from app.ai.mock import template_item, to_explain
 from app.ai.prompts import EXPLAIN_PROMPT_VERSION, EXTRACT_PROMPT_VERSION, load_prompt
+from app.ai.wording import is_safe
 from app.schemas import ConditionDoc, Explanation, ExplanationItem, Finding
 
 OCR_ONLY_PROMPT = ("이 문서 이미지의 모든 글자를 위에서 아래로, 줄바꿈까지 그대로 옮겨 적어줘. "
@@ -181,7 +182,8 @@ class GeminiExplainer:
             response_json_schema=explain_schema(),
         )
         last_error: Exception | None = None
-        for _ in range(2):   # 스키마에 안 맞으면 1회만 다시 요청
+        unsafe: list[ExplanationItem] | None = None
+        for _ in range(2):   # 스키마에 안 맞거나 단정 표현이 있으면 1회만 다시 생성
             text = generate_with_retry(self.client, self.model, contents, config,
                                        max_retries=self.max_retries, sleep=self.sleep, error=ExplanationError)
             try:
@@ -189,5 +191,11 @@ class GeminiExplainer:
             except ValidationError as e:
                 last_error = e
                 continue
-            return Explanation(prompt_version=EXPLAIN_PROMPT_VERSION, items=align(targets, reply.items))
+            items = align(targets, reply.items)
+            if all(is_safe(i) for i in items):
+                return Explanation(prompt_version=EXPLAIN_PROMPT_VERSION, items=items)
+            unsafe = items
+        if unsafe is not None:   # 다시 만들어도 단정 표현이 남으면 그 항목만 고정 문구로 바꾼다
+            items = [i if is_safe(i) else template_item(f) for i, f in zip(unsafe, targets)]
+            return Explanation(prompt_version=EXPLAIN_PROMPT_VERSION, items=items)
         raise ExplanationError(f"Gemini 응답이 설명 스키마에 맞지 않습니다: {last_error}")

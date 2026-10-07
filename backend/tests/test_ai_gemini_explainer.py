@@ -94,3 +94,32 @@ def test_factory_requires_api_key(monkeypatch):
     monkeypatch.setattr(settings, "gemini_api_key", "")
     with pytest.raises(ValueError, match="GEMINI_API_KEY"):
         get_explainer()
+
+
+# --- 9-3 단정 표현 차단 ---
+
+def unsafe_reply():
+    return json.dumps({"items": [
+        {"item": "수습", "summary": "근로기준법 위반입니다", "question": "왜 불법 계약을 했나요?"},
+        {"item": "연차유급휴가", "summary": "연차 내용이 빠져 있어요", "question": "적어 주실 수 있을까요?"},
+    ]}, ensure_ascii=False)
+
+
+def test_assertive_wording_is_regenerated_once():
+    explainer, models, _ = make([unsafe_reply(), reply("수습", "연차유급휴가")])
+    items = explainer.explain(FINDINGS).items
+    assert len(models.calls) == 2
+    assert items[0].summary == "수습 설명"
+
+
+def test_assertive_items_still_left_are_replaced_by_template():
+    explainer, _, _ = make([unsafe_reply(), unsafe_reply()])
+    items = explainer.explain(FINDINGS).items
+    assert items[0].summary == "공고 수습 없음 → 계약서 수습 3개월"   # 고정 문구로 교체
+    assert items[1].summary == "연차 내용이 빠져 있어요"               # 안전한 항목은 그대로
+
+
+def test_unsafe_then_invalid_json_keeps_sanitized_first_reply():
+    explainer, _, _ = make([unsafe_reply(), "not json"])
+    items = explainer.explain(FINDINGS).items
+    assert [i.summary for i in items] == ["공고 수습 없음 → 계약서 수습 3개월", "연차 내용이 빠져 있어요"]
