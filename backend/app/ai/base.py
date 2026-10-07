@@ -4,7 +4,7 @@ from typing import Literal, Protocol
 
 from pydantic import BaseModel
 
-from app.schemas import ConditionDoc, Finding
+from app.schemas import ConditionDoc, Explanation, Finding
 
 DocKind = Literal["posting", "contract", "payslip"]
 
@@ -35,7 +35,11 @@ class OcrProvider(Protocol):
     def read_text(self, image_bytes: bytes, media_type: str) -> str: ...
 
 
-class ExplainerProvider(Protocol):
-    """판정 결과를 사람이 읽을 설명으로 바꾼다 (Phase 9)."""
+class ExplanationError(RuntimeError):
+    """설명 생성 실패. 판정 결과는 이미 있으므로 대조 흐름을 멈추지 않고 고정 문구로 대신한다."""
 
-    def explain(self, findings: list[Finding]) -> dict: ...
+
+class ExplainerProvider(Protocol):
+    """판정 결과(findings)만 받아 쉬운 말 설명과 질문으로 바꾼다. 새로 판단하지 않는다."""
+
+    def explain(self, findings: list[Finding]) -> Explanation: ...
