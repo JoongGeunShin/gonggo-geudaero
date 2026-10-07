@@ -68,11 +68,46 @@ function buildRows(doc: ConditionDoc): Row[] {
 
 // ---------- 컴포넌트 ----------
 
-type Props = { doc: ConditionDoc; title?: string };
+type Props = {
+  doc: ConditionDoc;
+  title?: string;
+  // 결과 화면 왼쪽 단용: 값이 있는 항목만 짧게, 없는 항목은 "공고에 없음" 칩으로 모은다
+  compact?: boolean;
+};
 
-export default function ConditionCard({ doc, title = "공고에서 읽은 조건" }: Props) {
+export default function ConditionCard({ doc, title = "공고에서 읽은 조건", compact = false }: Props) {
   const rows = buildRows(doc);
   const company = plain(doc.company.value);
+
+  if (compact) {
+    const filled = rows.filter((r) => r.text);
+    const missing = rows.filter((r) => !r.text);
+    return (
+      <section className="rounded-xl border border-line bg-white p-4">
+        <h2 className="font-bold">{company ?? "회사명 없음"}</h2>
+        <dl className="mt-3 space-y-2 text-sm">
+          {filled.map(({ label, text }) => (
+            <div key={label} className="flex justify-between gap-3">
+              <dt className="shrink-0 text-sub">{label}</dt>
+              <dd className="text-right font-medium">{text}</dd>
+            </div>
+          ))}
+        </dl>
+        {missing.length > 0 && (
+          <div className="mt-4 border-t border-line pt-3">
+            <p className="text-xs text-sub">공고에 없음</p>
+            <ul className="mt-2 flex flex-wrap gap-1">
+              {missing.map(({ label }) => (
+                <li key={label} className="rounded-full bg-caution-soft px-2 py-0.5 text-xs text-caution">
+                  {label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+    );
+  }
 
   return (
     <section className="rounded-xl border border-line bg-white">

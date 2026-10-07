@@ -32,12 +32,9 @@ export type ConditionDoc = {
   penalty_or_damages_clause: ExtractedField;
 };
 
-export type Level =
-  | "불리 변경"
-  | "법 기준 확인"
-  | "누락"
-  | "모호"
-  | "동일·유리";
+// 심각한 순서. 화면 정렬·요약 순서도 이 배열을 따른다
+export const LEVELS = ["불리 변경", "법 기준 확인", "누락", "모호", "동일·유리"] as const;
+export type Level = (typeof LEVELS)[number];
 
 export type Finding = {
   level: Level;
