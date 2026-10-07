@@ -14,7 +14,7 @@ type Props = { findings: Finding[] };
 export default function CompareTable({ findings }: Props) {
   return (
     <div className="overflow-x-auto rounded-xl border border-line bg-white">
-      <table className="w-full min-w-[720px] text-left text-sm">
+      <table className="w-full min-w-[640px] text-left text-sm">
         <thead className="bg-primary-soft text-text">
           <tr>
             <th scope="col" className="w-1/4 px-4 py-3 font-bold">항목</th>
