@@ -48,5 +48,5 @@ class Comparison(Base):
     posting_id: Mapped[int] = mapped_column(ForeignKey("postings.id"))
     document_id: Mapped[int] = mapped_column(ForeignKey("documents.id"))
     findings_json: Mapped[list] = mapped_column(JSON)            # list[Finding]
-    explanation_json: Mapped[dict | None] = mapped_column(JSON)  # Phase 9 설명 단계에서 채움
+    explanation_json: Mapped[dict | None] = mapped_column(JSON)  # Explanation (설명·질문)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

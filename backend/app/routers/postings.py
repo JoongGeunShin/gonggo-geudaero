@@ -4,8 +4,8 @@ from typing import Optional
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from sqlalchemy.orm import Session
 
-from app.ai import get_extractor
-from app.ai.base import ExtractionError, ExtractorProvider
+from app.ai import get_explainer, get_extractor
+from app.ai.base import ExplainerProvider, ExtractionError, ExtractorProvider
 from app.db import get_db
 from app.models import Posting
 from app.schemas import BusinessCheckRequest, ComparisonRead, PostingCreate, PostingRead
@@ -75,11 +75,12 @@ def compare_contract(
     file: UploadFile = File(..., description="근로계약서 (jpg·png·pdf, 10MB 이하)"),
     db: Session = Depends(get_db),
     extractor: ExtractorProvider = Depends(get_extractor),
+    explainer: ExplainerProvider = Depends(get_explainer),
 ):
-    """계약서 이미지 업로드 → 추출 → 규칙 판정 → 저장 → 결과 반환."""
+    """계약서 이미지 업로드 → 추출 → 규칙 판정 → 설명 생성 → 저장 → 결과 반환."""
     posting = get_posting_or_404(db, posting_id)
     if posting.extracted_json is None:
         raise HTTPException(status_code=409, detail="공고 추출 결과가 없어 비교할 수 없음")
     data = file.file.read(MAX_UPLOAD_BYTES + 1)
     with upload_errors_as_http():
-        return compare_with_contract_upload(db, extractor, posting, data, file.content_type)
+        return compare_with_contract_upload(db, extractor, explainer, posting, data, file.content_type)
