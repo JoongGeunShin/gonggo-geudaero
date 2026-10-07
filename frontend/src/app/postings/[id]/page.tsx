@@ -1,8 +1,15 @@
 import { notFound } from "next/navigation";
 import ConditionCard from "@/components/ConditionCard";
+import ContractRequest from "@/components/ContractRequest";
 import ContractUpload from "@/components/ContractUpload";
 import StepIndicator from "@/components/StepIndicator";
 import { ApiError, getPosting, type Posting } from "@/lib/api";
+
+// 교부 요청 문구에 넣을 회사 이름: 사용자가 입력한 값 → 추출한 값 순서
+function companyName(posting: Posting): string | null {
+  const extracted = posting.extracted_json.company.value;
+  return posting.company_name || (typeof extracted === "string" ? extracted : null);
+}
 
 // 서버 컴포넌트: 브라우저가 아니라 Next 서버에서 실행되어 공고를 미리 불러온다
 export default async function PostingPage({ params }: PageProps<"/postings/[id]">) {
@@ -32,6 +39,7 @@ export default async function PostingPage({ params }: PageProps<"/postings/[id]"
         </p>
       </div>
       <ContractUpload postingId={posting.id} />
+      <ContractRequest company={companyName(posting)} />
       <details>
         <summary className="cursor-pointer text-sm text-sub hover:text-primary">
           저장한 공고 조건 다시 보기
