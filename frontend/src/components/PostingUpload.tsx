@@ -4,23 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import ConditionCard from "@/components/ConditionCard";
 import { ApiError, extractPosting, type Posting } from "@/lib/api";
-
-// 백엔드 app/services/extraction.py 와 같은 기준
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "application/pdf"];
-const MAX_BYTES = 10 * 1024 * 1024;
+import { checkFile, FILE_ACCEPT, FILE_HINT } from "@/lib/upload";
 
 type State =
   | { kind: "idle" }
   | { kind: "loading" }
   | { kind: "error"; message: string }
   | { kind: "done"; posting: Posting };
-
-// 올리기 전에 브라우저에서 먼저 거른다 (서버도 같은 검사를 한 번 더 한다)
-function checkFile(file: File): string | null {
-  if (!ALLOWED_TYPES.includes(file.type)) return "jpg, png, pdf 파일만 올릴 수 있어요.";
-  if (file.size > MAX_BYTES) return "파일은 10MB 이하만 올릴 수 있어요.";
-  return null;
-}
 
 function errorMessage(e: unknown): string {
   if (e instanceof ApiError) {
@@ -100,12 +90,12 @@ export default function PostingUpload() {
         <input
           id="posting-file"
           type="file"
-          accept=".jpg,.jpeg,.png,.pdf"
+          accept={FILE_ACCEPT}
           disabled={loading}
           onChange={(e) => setFile(e.target.files?.[0] ?? null)}
           className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-primary-soft file:px-4 file:py-2 file:text-primary"
         />
-        <p className="text-xs text-sub">jpg·png·pdf, 10MB 이하</p>
+        <p className="text-xs text-sub">{FILE_HINT}</p>
       </div>
 
       <div className="space-y-2">
