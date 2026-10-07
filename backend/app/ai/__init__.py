@@ -22,4 +22,10 @@ def get_explainer() -> ExplainerProvider:
     if provider == "mock":
         from app.ai.mock import MockExplainer
         return MockExplainer()
+    if provider == "gemini":
+        model = settings.gemini_explain_model or settings.gemini_model
+        if not settings.gemini_api_key or not model:
+            raise ValueError("AI_PROVIDER=gemini에는 GEMINI_API_KEY와 GEMINI_MODEL이 필요합니다")
+        from app.ai.gemini import GeminiExplainer
+        return GeminiExplainer(api_key=settings.gemini_api_key, model=model)
     raise ValueError(f"지원하지 않는 AI_PROVIDER: {provider}")
