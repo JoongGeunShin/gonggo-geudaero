@@ -46,6 +46,7 @@ def test_extracts_and_saves_sample_posting(client):
     assert posting["extracted_json"]["wage"] == expected.wage.model_dump()
     assert posting["company_name"] == expected.company.value
     assert posting["raw_text"]
+    assert posting["extracted_by"] == "mock"
 
     assert client.get(f"/postings/{posting['id']}").json() == posting
 

@@ -18,6 +18,7 @@ def create_posting_from_upload(db: Session, extractor: ExtractorProvider, data: 
         source_url=source_url,
         raw_text=result.full_text,
         extracted_json=result.fields.model_dump(),
+        extracted_by=result.extracted_by,
         company_name=company if isinstance(company, str) else None,
     )
     db.add(posting)

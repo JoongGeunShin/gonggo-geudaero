@@ -4,6 +4,7 @@ import CompareTable from "@/components/CompareTable";
 import ConditionCard from "@/components/ConditionCard";
 import Disclaimer from "@/components/Disclaimer";
 import FindingSummary from "@/components/FindingSummary";
+import MockNotice, { isMock } from "@/components/MockNotice";
 import StepIndicator from "@/components/StepIndicator";
 import { ApiError, getComparison, getPosting, LEVELS, type Comparison, type Posting } from "@/lib/api";
 
@@ -55,10 +56,15 @@ export default async function ComparisonPage({ params }: PageProps<"/comparisons
     (a, b) => LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level),
   );
   const status = businessStatus(posting);
+  const mockDocs = [
+    ...(isMock(posting.extracted_by) ? ["공고"] : []),
+    ...(isMock(comparison.contract_extracted_by) ? ["계약서"] : []),
+  ];
 
   return (
     <div className="space-y-6">
       <StepIndicator current={3} />
+      <MockNotice docs={mockDocs} />
 
       <div className="grid gap-6 lg:grid-cols-[16rem_1fr_16rem]">
         <div>

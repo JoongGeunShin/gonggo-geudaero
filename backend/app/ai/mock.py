@@ -11,6 +11,7 @@ from app.ai.base import DocKind, ExtractionResult
 from app.schemas import ConditionDoc, Explanation, ExplanationItem, Finding
 
 SAMPLES_DIR = Path(__file__).resolve().parents[3] / "samples"   # backend/app/ai → 저장소 루트/samples
+MOCK_EXTRACTED_BY = "mock"   # ExtractionResult.extracted_by 값. 화면은 이 값을 보고 'MOCK 데이터'로 표시한다
 
 
 def _sha256(data: bytes) -> str:
@@ -38,9 +39,9 @@ class MockExtractor:
     def extract(self, image_bytes: bytes, media_type: str, doc_kind: DocKind) -> ExtractionResult:
         path = self._by_hash.get(_sha256(image_bytes)) or self.samples_dir / f"case1_{doc_kind}.json"
         if not path.exists():
-            return ExtractionResult(full_text="")
+            return ExtractionResult(full_text="", extracted_by=MOCK_EXTRACTED_BY)
         doc = ConditionDoc.model_validate_json(path.read_text(encoding="utf-8"))
-        return ExtractionResult(full_text=_full_text(doc), fields=doc)
+        return ExtractionResult(full_text=_full_text(doc), fields=doc, extracted_by=MOCK_EXTRACTED_BY)
 
 
 TEMPLATE_VERSION = "template_v1"

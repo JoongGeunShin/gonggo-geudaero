@@ -57,6 +57,7 @@ def test_extract_returns_parsed_result():
     assert isinstance(result, ExtractionResult)
     assert result.full_text == "시급 10,320원"
     assert result.fields.wage.value["amount_min"] == 10320
+    assert result.extracted_by == "gemini:test-model"
 
 
 def test_request_uses_model_prompt_and_json_schema():

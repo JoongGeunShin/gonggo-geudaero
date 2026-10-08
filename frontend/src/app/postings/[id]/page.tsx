@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import ConditionCard from "@/components/ConditionCard";
 import ContractRequest from "@/components/ContractRequest";
 import ContractUpload from "@/components/ContractUpload";
+import MockNotice, { isMock } from "@/components/MockNotice";
 import StepIndicator from "@/components/StepIndicator";
 import { ApiError, getPosting, type Posting } from "@/lib/api";
 
@@ -32,6 +33,7 @@ export default async function PostingPage({ params }: PageProps<"/postings/[id]"
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <StepIndicator current={2} />
+      <MockNotice docs={isMock(posting.extracted_by) ? ["공고"] : []} />
       <div>
         <h1 className="text-2xl font-bold">받은 근로계약서를 올려 주세요</h1>
         <p className="mt-2 text-sub">

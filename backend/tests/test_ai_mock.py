@@ -21,6 +21,7 @@ def test_sample_image_returns_its_answer(name):
     kind = name.split("_")[1]
     result = MockExtractor().extract(image, "image/png", kind)
     assert result.fields == _sample(name)
+    assert result.extracted_by == "mock"
 
 
 def test_full_text_contains_every_quote():

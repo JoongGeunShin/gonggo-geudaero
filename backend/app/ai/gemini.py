@@ -123,7 +123,8 @@ class GeminiExtractor:
         for _ in range(2):   # 스키마에 안 맞으면 1회만 다시 요청
             text = self._call(contents, config)
             try:
-                return ExtractionResult.model_validate_json(text or "")
+                result = ExtractionResult.model_validate_json(text or "")
+                return result.model_copy(update={"extracted_by": f"gemini:{self.model}"})
             except ValidationError as e:
                 last_error = e
         raise ExtractionError(f"Gemini 응답이 추출 스키마에 맞지 않습니다: {last_error}")

@@ -33,6 +33,7 @@ def test_two_images_give_expected_flags(client, case):
     result = r.json()
     assert result["posting_id"] == posting_id
     assert result["document_id"] > 0
+    assert result["contract_extracted_by"] == "mock"
     found = {(f["level"], f["item"]) for f in result["findings_json"] if f["level"] in (RED, AMBER)}
     assert found == {(e["level"], e["item"]) for e in ANSWER_KEY[case]["expected_flags"]}
 

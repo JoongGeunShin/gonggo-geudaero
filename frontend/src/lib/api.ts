@@ -55,6 +55,7 @@ export type Posting = {
   company_name: string | null;
   b_no: string | null;
   nts_status_json: Record<string, unknown> | null;
+  extracted_by: string | null; // "mock" | "gemini:<모델명>", 수동 입력이면 null
 };
 
 // 판정 결과 한 건의 쉬운 말 설명 + 사업주에게 물어볼 질문 (item으로 Finding과 짝을 맞춘다)
@@ -75,6 +76,7 @@ export type Comparison = {
   document_id: number;
   findings_json: Finding[];
   explanation_json: Explanation | null; // Phase 9 이전에 만든 결과는 null
+  contract_extracted_by: string | null; // 계약서 추출 주체: "mock" | "gemini:<모델명>"
   created_at: string;
 };
 
