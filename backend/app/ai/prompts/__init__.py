@@ -3,7 +3,7 @@
 from pathlib import Path
 
 PROMPTS_DIR = Path(__file__).resolve().parent
-EXTRACT_PROMPT_VERSION = "extract_v1"   # 바꿀 때마다 Phase 10 평가 결과를 비교
+EXTRACT_PROMPT_VERSION = "extract_v2"   # 바꿀 때마다 Phase 10 평가 결과를 비교 (eval/README.md)
 EXPLAIN_PROMPT_VERSION = "explain_v1"
 
 

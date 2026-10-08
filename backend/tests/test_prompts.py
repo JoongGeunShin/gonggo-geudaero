@@ -4,10 +4,17 @@ from app.ai.prompts import EXPLAIN_PROMPT_VERSION, EXTRACT_PROMPT_VERSION, load_
 from app.schemas import ConditionDoc, Explanation, ExplanationItem
 
 
-def test_extract_prompt_mentions_every_schema_field():
-    prompt = load_prompt(EXTRACT_PROMPT_VERSION)
+@pytest.mark.parametrize("version", [EXTRACT_PROMPT_VERSION, "extract_v1", "extract_v2"])
+def test_extract_prompt_mentions_every_schema_field(version):
+    prompt = load_prompt(version)
     missing = [name for name in ConditionDoc.model_fields if f'"{name}"' not in prompt]
     assert missing == []
+
+
+def test_extract_v2_keeps_workplace_and_maps_part_time_to_other():
+    prompt = load_prompt("extract_v2")
+    assert "근무지 주소는 가리지 않고" in prompt
+    assert "아르바이트" in prompt and '"기타"' in prompt
 
 
 def test_explain_prompt_mentions_every_output_field():

@@ -41,6 +41,11 @@ def test_text_fields_accept_more_detailed_value():
     assert not run_eval.field_ok("workplace", "인천 남동구", "경기 시흥시")
 
 
+def test_employment_type_uses_engine_synonyms():
+    assert run_eval.field_ok("employment_type", "기간제", "계약직")
+    assert not run_eval.field_ok("employment_type", "아르바이트", "기타")
+
+
 def test_presence_fields_only_check_existence():
     assert run_eval.field_ok("holidays", "일요일", "매주 일요일")
     assert not run_eval.field_ok("annual_leave", None, "근로기준법에 따라 부여")

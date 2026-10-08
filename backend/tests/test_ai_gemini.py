@@ -67,7 +67,7 @@ def test_request_uses_model_prompt_and_json_schema():
     part, prompt = call["contents"]
     assert part.inline_data.data == b"img"
     assert part.inline_data.mime_type == "image/png"
-    assert '"penalty_or_damages_clause"' in prompt     # extract_v1.md 내용
+    assert '"penalty_or_damages_clause"' in prompt     # 추출 프롬프트(extract_v*.md) 내용
     assert "채용공고" in prompt                        # doc_kind 안내
     assert call["config"].response_mime_type == "application/json"
     assert call["config"].response_json_schema == response_schema()
@@ -85,6 +85,14 @@ def _walk(node):
         for v in node:
             yield from _walk(v)
 
+
+
+def test_prompt_version_can_be_switched():
+    extractor, models, _ = make([GOOD], prompt_version="extract_v2")
+    extractor.extract(b"img", "image/png", "posting")
+    _, prompt = models.calls[0]["contents"]
+    assert "근무지 주소는 가리지 않고" in prompt
+    assert extractor.prompt_version == "extract_v2"
 
 def test_response_schema_covers_every_condition_field():
     fields = response_schema()["properties"]["fields"]["properties"]

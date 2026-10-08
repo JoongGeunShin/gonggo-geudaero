@@ -30,7 +30,7 @@ from app.ai.base import ExtractionError, ExtractionResult  # noqa: E402
 from app.ai.mask import mask_result  # noqa: E402
 from app.ai.prompts import EXTRACT_PROMPT_VERSION  # noqa: E402
 from app.ai.verify import normalize, verify_quotes  # noqa: E402
-from app.rules.engine import AMBER, GRAY, GREEN, RED, YELLOW, compare  # noqa: E402
+from app.rules.engine import AMBER, GRAY, GREEN, RED, SAME_EMPLOYMENT, YELLOW, compare  # noqa: E402
 from app.schemas import ConditionDoc  # noqa: E402
 
 DATA = EVAL_DIR / "data"
@@ -84,6 +84,8 @@ def same(a, b) -> bool:
 def field_ok(key, pred, gold) -> bool:
     if key in SCORED_PRESENCE:
         return is_empty(pred) == is_empty(gold)
+    if key == "employment_type":   # 엔진과 같은 기준: 기간제 = 계약직
+        pred, gold = SAME_EMPLOYMENT.get(pred, pred), SAME_EMPLOYMENT.get(gold, gold)
     if key in SCORED_TEXT and not is_empty(pred) and not is_empty(gold):
         p, g = normalize(str(pred)), normalize(str(gold))
         return p in g or g in p   # 엔진의 근무지 비교와 같은 기준
