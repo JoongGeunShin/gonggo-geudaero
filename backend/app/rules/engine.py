@@ -34,11 +34,14 @@ def _hours_key(doc: ConditionDoc):
 
 # --- 1) 고용형태 ---
 
+SAME_EMPLOYMENT = {"기간제": "계약직"}   # 표준 양식 이름('기간제 근로자')과 공고 표현('계약직')은 같은 뜻
+
+
 def check_employment_type(posting, contract):
     pe, ce = posting.employment_type.value, contract.employment_type.value
     if pe == "정규직" and ce and ce != "정규직":
         return [_finding(RED, "고용형태", f"공고 '{pe}' → 계약서 '{ce}'", posting, contract, "employment_type")]
-    if pe and ce and pe != ce:
+    if pe and ce and SAME_EMPLOYMENT.get(pe, pe) != SAME_EMPLOYMENT.get(ce, ce):   # 메시지에는 원래 표현을 쓴다
         return [_finding(GRAY, "고용형태", f"공고 '{pe}' / 계약서 '{ce}' 표현이 다름 — 확인 필요",
                          posting, contract, "employment_type")]
     return []
