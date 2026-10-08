@@ -1,0 +1,94 @@
+{
+  "doc_type": {
+    "value": "계약서",
+    "quote": null
+  },
+  "company": {
+    "value": "마바베이커리(모의)",
+    "quote": "마바베이커리(모의)"
+  },
+  "headcount": {
+    "value": null,
+    "quote": null
+  },
+  "employment_type": {
+    "value": "기타",
+    "quote": "아르바이트"
+  },
+  "contract_period_months": {
+    "value": null,
+    "quote": null
+  },
+  "probation": {
+    "value": null,
+    "quote": null
+  },
+  "workplace": {
+    "value": "서울 마포구 ○○동 매장",
+    "quote": "서울 마포구 ○○동 매장"
+  },
+  "job_duties": {
+    "value": "빵 진열 및 계산",
+    "quote": "빵 진열 및 계산"
+  },
+  "work_days_per_week": {
+    "value": 3,
+    "quote": "매주 토, 일, 월 근무"
+  },
+  "work_days_desc": {
+    "value": "토, 일, 월",
+    "quote": "매주 토, 일, 월 근무"
+  },
+  "start_time": {
+    "value": "10:00",
+    "quote": "10시 00분부터 15시 00분까지 (휴게시간 30분)"
+  },
+  "end_time": {
+    "value": "15:00",
+    "quote": "10시 00분부터 15시 00분까지 (휴게시간 30분)"
+  },
+  "break_minutes": {
+    "value": 30,
+    "quote": "휴게시간 30분"
+  },
+  "weekly_hours": {
+    "value": null,
+    "quote": null
+  },
+  "wage": {
+    "value": {
+      "type": "시급",
+      "amount_min": 11000,
+      "amount_max": 11000
+    },
+    "quote": "시급 11,000원"
+  },
+  "comprehensive_wage": {
+    "value": null,
+    "quote": null
+  },
+  "allowances": {
+    "value": null,
+    "quote": null
+  },
+  "pay_day": {
+    "value": "매월 10일",
+    "quote": "임금지급일 : 매월 10일"
+  },
+  "holidays": {
+    "value": "매주 일요일",
+    "quote": "주휴일 매주 일요일"
+  },
+  "annual_leave": {
+    "value": "근로기준법에 따라 부여",
+    "quote": "근로기준법에서 정하는 바에 따라 부여함"
+  },
+  "social_insurance": {
+    "value": "4대보험",
+    "quote": "고용보험, 산재보험, 국민연금, 건강보험"
+  },
+  "penalty_or_damages_clause": {
+    "value": "근무 시작 후 3개월 이내 퇴사 시 교육비 30만원을 마지막 급여에서 공제한다",
+    "quote": "근무 시작 후 3개월 이내 퇴사 시 교육비 30만원을 마지막 급여에서 공제한다."
+  }
+}

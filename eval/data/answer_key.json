@@ -1,0 +1,635 @@
+{
+  "pair01": {
+    "desc": "조건 동일",
+    "variations": [
+      "동일"
+    ],
+    "photo": [],
+    "expected_flags": []
+  },
+  "pair02": {
+    "desc": "조건 동일 (시급 아르바이트)",
+    "variations": [
+      "동일"
+    ],
+    "photo": [],
+    "expected_flags": []
+  },
+  "pair03": {
+    "desc": "조건 동일 (연봉, 목록형 공고)",
+    "variations": [
+      "동일"
+    ],
+    "photo": [],
+    "expected_flags": []
+  },
+  "pair04": {
+    "desc": "공고 범위(300만~350만)의 하한으로 계약",
+    "variations": [
+      "동일"
+    ],
+    "photo": [],
+    "expected_flags": []
+  },
+  "pair05": {
+    "desc": "공고에도 포괄임금이 있었음",
+    "variations": [
+      "동일"
+    ],
+    "photo": [],
+    "expected_flags": []
+  },
+  "pair06": {
+    "desc": "조건 동일 (계약직, 사진)",
+    "variations": [
+      "동일",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": []
+  },
+  "pair07": {
+    "desc": "월급 250만 → 230만",
+    "variations": [
+      "임금 감액"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "임금(월 환산)"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair08": {
+    "desc": "시급 11,000 → 10,500",
+    "variations": [
+      "임금 감액"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "임금(월 환산)"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair09": {
+    "desc": "연봉 3,600만 → 3,300만 (공고 사진)",
+    "variations": [
+      "임금 감액",
+      "사진"
+    ],
+    "photo": [
+      "posting"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "임금(월 환산)"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair10": {
+    "desc": "범위 하한 300만보다 낮은 280만 (사진)",
+    "variations": [
+      "임금 감액",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "임금(월 환산)"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair11": {
+    "desc": "시급 10,800 → 10,320",
+    "variations": [
+      "임금 감액"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "임금(월 환산)"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair12": {
+    "desc": "월급 240만 → 220만 (사진)",
+    "variations": [
+      "임금 감액",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "임금(월 환산)"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair13": {
+    "desc": "수습 3개월 90% 신설",
+    "variations": [
+      "수습 신설"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "수습"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "수습 감액"
+      }
+    ]
+  },
+  "pair14": {
+    "desc": "수습 3개월 100% 신설",
+    "variations": [
+      "수습 신설"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "수습"
+      }
+    ]
+  },
+  "pair15": {
+    "desc": "계약직 12개월에 수습 3개월 90% 신설",
+    "variations": [
+      "수습 신설"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "수습"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "수습 감액"
+      }
+    ]
+  },
+  "pair16": {
+    "desc": "공고에도 수습 3개월이 있었음",
+    "variations": [
+      "동일"
+    ],
+    "photo": [],
+    "expected_flags": []
+  },
+  "pair17": {
+    "desc": "수습 6개월 80% 신설 (사진)",
+    "variations": [
+      "수습 신설",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "수습"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "수습 감액"
+      }
+    ]
+  },
+  "pair18": {
+    "desc": "같은 월급에 연장 20시간 포괄 신설",
+    "variations": [
+      "포괄 전환"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "포괄임금"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair19": {
+    "desc": "같은 연봉에 연장 20시간 포괄 신설",
+    "variations": [
+      "포괄 전환"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "포괄임금"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair20": {
+    "desc": "연장 30시간 포괄 → 기본 시급이 최저임금 미달 (사진)",
+    "variations": [
+      "포괄 전환",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "포괄임금"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "최저임금"
+      }
+    ]
+  },
+  "pair21": {
+    "desc": "범위 하한 300만에 연장 10시간 포괄",
+    "variations": [
+      "포괄 전환"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "포괄임금"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      }
+    ]
+  },
+  "pair22": {
+    "desc": "연장 15시간 포괄 → 최저임금 미달",
+    "variations": [
+      "포괄 전환"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "포괄임금"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "최저임금"
+      }
+    ]
+  },
+  "pair23": {
+    "desc": "임금 지급일 누락",
+    "variations": [
+      "누락"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "누락",
+        "item": "임금 지급일"
+      }
+    ]
+  },
+  "pair24": {
+    "desc": "휴일·연차 누락",
+    "variations": [
+      "누락"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "누락",
+        "item": "휴일"
+      },
+      {
+        "level": "누락",
+        "item": "연차유급휴가"
+      }
+    ]
+  },
+  "pair25": {
+    "desc": "연차 누락 (사진)",
+    "variations": [
+      "누락",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "누락",
+        "item": "연차유급휴가"
+      }
+    ]
+  },
+  "pair26": {
+    "desc": "임금 지급일·휴일 누락",
+    "variations": [
+      "누락"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "누락",
+        "item": "임금 지급일"
+      },
+      {
+        "level": "누락",
+        "item": "휴일"
+      }
+    ]
+  },
+  "pair27": {
+    "desc": "소정근로시간 누락",
+    "variations": [
+      "누락"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "누락",
+        "item": "소정근로시간"
+      }
+    ]
+  },
+  "pair28": {
+    "desc": "정규직 → 계약직 12개월",
+    "variations": [
+      "고용형태 변경"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "고용형태"
+      }
+    ]
+  },
+  "pair29": {
+    "desc": "정규직 → 프리랜서",
+    "variations": [
+      "고용형태 변경"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "고용형태"
+      }
+    ]
+  },
+  "pair30": {
+    "desc": "정규직 → 계약직 6개월 (사진)",
+    "variations": [
+      "고용형태 변경",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "고용형태"
+      }
+    ]
+  },
+  "pair31": {
+    "desc": "주 5일 → 주 6일 (월~토)",
+    "variations": [
+      "근무일·시간 증가"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "근무일"
+      },
+      {
+        "level": "불리 변경",
+        "item": "근로시간"
+      }
+    ]
+  },
+  "pair32": {
+    "desc": "10:00~19:00 → 09:00~19:00",
+    "variations": [
+      "근무일·시간 증가"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "근로시간"
+      }
+    ]
+  },
+  "pair33": {
+    "desc": "10:00~15:00 → 10:00~17:00 (공고 사진)",
+    "variations": [
+      "근무일·시간 증가",
+      "사진"
+    ],
+    "photo": [
+      "posting"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "근로시간"
+      }
+    ]
+  },
+  "pair34": {
+    "desc": "주 5일 → 주 6일 (월~토)",
+    "variations": [
+      "근무일·시간 증가"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "근무일"
+      },
+      {
+        "level": "불리 변경",
+        "item": "근로시간"
+      }
+    ]
+  },
+  "pair35": {
+    "desc": "교육비 30만원 공제 조항",
+    "variations": [
+      "위약 조항"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "법 기준 확인",
+        "item": "위약·손해배상 예정"
+      }
+    ]
+  },
+  "pair36": {
+    "desc": "1년 내 퇴사 시 100만원 배상 조항 (사진)",
+    "variations": [
+      "위약 조항",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "법 기준 확인",
+        "item": "위약·손해배상 예정"
+      }
+    ]
+  },
+  "pair37": {
+    "desc": "공고 임금 '회사 내규' + 손해배상 조항",
+    "variations": [
+      "위약 조항",
+      "임금 비공개"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "모호",
+        "item": "임금"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "위약·손해배상 예정"
+      }
+    ]
+  },
+  "pair38": {
+    "desc": "공고 시급 10,320 → 계약 10,000 (최저임금 미달)",
+    "variations": [
+      "임금 감액",
+      "최저임금"
+    ],
+    "photo": [],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "임금(월 환산)"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "최저임금"
+      }
+    ]
+  },
+  "pair39": {
+    "desc": "근무지가 다른 지역 (사진)",
+    "variations": [
+      "근무지 변경",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "모호",
+        "item": "근무지"
+      }
+    ]
+  },
+  "pair40": {
+    "desc": "수습 90% + 포괄 20시간 + 연차 누락 (사진)",
+    "variations": [
+      "수습 신설",
+      "포괄 전환",
+      "누락",
+      "사진"
+    ],
+    "photo": [
+      "contract"
+    ],
+    "expected_flags": [
+      {
+        "level": "불리 변경",
+        "item": "수습"
+      },
+      {
+        "level": "법 기준 확인",
+        "item": "수습 감액"
+      },
+      {
+        "level": "불리 변경",
+        "item": "포괄임금"
+      },
+      {
+        "level": "불리 변경",
+        "item": "임금(기본 시급)"
+      },
+      {
+        "level": "누락",
+        "item": "연차유급휴가"
+      }
+    ]
+  }
+}

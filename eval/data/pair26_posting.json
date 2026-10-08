@@ -1,0 +1,94 @@
+{
+  "doc_type": {
+    "value": "공고",
+    "quote": null
+  },
+  "company": {
+    "value": "자차카페(모의)",
+    "quote": "자차카페(모의)"
+  },
+  "headcount": {
+    "value": null,
+    "quote": null
+  },
+  "employment_type": {
+    "value": "기타",
+    "quote": "아르바이트"
+  },
+  "contract_period_months": {
+    "value": null,
+    "quote": null
+  },
+  "probation": {
+    "value": null,
+    "quote": null
+  },
+  "workplace": {
+    "value": "부산 해운대구 ○○로 매장",
+    "quote": "부산 해운대구 ○○로 매장"
+  },
+  "job_duties": {
+    "value": "음료 제조 및 매장 관리",
+    "quote": "음료 제조 및 매장 관리"
+  },
+  "work_days_per_week": {
+    "value": 5,
+    "quote": "주 5일 (월~금)"
+  },
+  "work_days_desc": {
+    "value": "월~금",
+    "quote": "주 5일 (월~금)"
+  },
+  "start_time": {
+    "value": "14:00",
+    "quote": "14:00 ~ 20:00 (휴게 30분)"
+  },
+  "end_time": {
+    "value": "20:00",
+    "quote": "14:00 ~ 20:00 (휴게 30분)"
+  },
+  "break_minutes": {
+    "value": 30,
+    "quote": "휴게 30분"
+  },
+  "weekly_hours": {
+    "value": null,
+    "quote": null
+  },
+  "wage": {
+    "value": {
+      "type": "시급",
+      "amount_min": 10800,
+      "amount_max": 10800
+    },
+    "quote": "시급 10,800원"
+  },
+  "comprehensive_wage": {
+    "value": null,
+    "quote": null
+  },
+  "allowances": {
+    "value": null,
+    "quote": null
+  },
+  "pay_day": {
+    "value": null,
+    "quote": null
+  },
+  "holidays": {
+    "value": null,
+    "quote": null
+  },
+  "annual_leave": {
+    "value": null,
+    "quote": null
+  },
+  "social_insurance": {
+    "value": "4대보험",
+    "quote": "4대보험 가입"
+  },
+  "penalty_or_damages_clause": {
+    "value": null,
+    "quote": null
+  }
+}
