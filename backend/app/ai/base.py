@@ -14,6 +14,7 @@ class ExtractionResult(BaseModel):
 
     full_text: str                          # OCR 원문 (인용 검증에 사용)
     fields: ConditionDoc = ConditionDoc()   # 스키마에 맞춘 추출 값
+    extracted_by: str = ""                  # 누가 추출했는지: "mock" | "gemini:<모델명>" (화면의 MOCK 표시에 씀)
 
 
 class ExtractionError(RuntimeError):

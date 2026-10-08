@@ -32,6 +32,7 @@ def compare_with_contract_upload(db: Session, extractor: ExtractorProvider, expl
         doc_type="contract",
         raw_text=result.full_text,
         extracted_json=result.fields.model_dump(),
+        extracted_by=result.extracted_by,
     )
     db.add(document)
     db.flush()   # commit 전에 document.id를 받아 온다

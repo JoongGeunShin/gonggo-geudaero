@@ -3,7 +3,7 @@
 from datetime import datetime
 
 from sqlalchemy import JSON, DateTime, ForeignKey, String, Text, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
 
@@ -20,6 +20,7 @@ class Posting(Base):
     image_path: Mapped[str | None] = mapped_column(String(500))
     raw_text: Mapped[str | None] = mapped_column(Text)
     extracted_json: Mapped[dict | None] = mapped_column(JSON)    # ConditionDoc
+    extracted_by: Mapped[str | None] = mapped_column(String(100))  # mock | gemini:<모델명> (null = 수동 입력)
     company_name: Mapped[str | None] = mapped_column(String(200))
     b_no: Mapped[str | None] = mapped_column(String(10))         # 사업자등록번호, 하이픈 없이
     nts_status_json: Mapped[dict | None] = mapped_column(JSON)   # 국세청 상태조회 응답
@@ -36,6 +37,7 @@ class Document(Base):
     image_path: Mapped[str | None] = mapped_column(String(500))
     raw_text: Mapped[str | None] = mapped_column(Text)
     extracted_json: Mapped[dict | None] = mapped_column(JSON)    # ConditionDoc
+    extracted_by: Mapped[str | None] = mapped_column(String(100))  # mock | gemini:<모델명>
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
@@ -50,3 +52,10 @@ class Comparison(Base):
     findings_json: Mapped[list] = mapped_column(JSON)            # list[Finding]
     explanation_json: Mapped[dict | None] = mapped_column(JSON)  # Explanation (설명·질문)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    document: Mapped[Document] = relationship()
+
+    @property
+    def contract_extracted_by(self) -> str | None:
+        """대조에 쓴 계약서를 누가 추출했는지. 응답(ComparisonRead)에 그대로 실린다."""
+        return self.document.extracted_by

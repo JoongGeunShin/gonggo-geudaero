@@ -96,6 +96,7 @@ class PostingRead(PostingCreate):
     id: int
     created_at: datetime
     nts_status_json: Optional[dict] = None   # 국세청 상태조회 응답 (null = 조회 안 함 또는 확인 불가)
+    extracted_by: Optional[str] = None       # mock | gemini:<모델명> (null = 수동 입력)
 
 
 class ComparisonRead(BaseModel):
@@ -108,6 +109,7 @@ class ComparisonRead(BaseModel):
     document_id: int
     findings_json: list[Finding]
     explanation_json: Optional[Explanation] = None   # 설명 단계 결과 (Phase 9 이전 결과는 null)
+    contract_extracted_by: Optional[str] = None      # 계약서 추출 주체: mock | gemini:<모델명>
     created_at: datetime
 
 
