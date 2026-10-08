@@ -1,0 +1,94 @@
+{
+  "doc_type": {
+    "value": "계약서",
+    "quote": null
+  },
+  "company": {
+    "value": "(주)사아소프트(모의)",
+    "quote": "(주)사아소프트(모의)"
+  },
+  "headcount": {
+    "value": null,
+    "quote": null
+  },
+  "employment_type": {
+    "value": "정규직",
+    "quote": "정규직"
+  },
+  "contract_period_months": {
+    "value": null,
+    "quote": null
+  },
+  "probation": {
+    "value": null,
+    "quote": null
+  },
+  "workplace": {
+    "value": "서울 강남구 역삼동",
+    "quote": "서울 강남구 역삼동"
+  },
+  "job_duties": {
+    "value": "웹 서비스 운영 및 고객 문의 대응",
+    "quote": "웹 서비스 운영 및 고객 문의 대응"
+  },
+  "work_days_per_week": {
+    "value": 5,
+    "quote": "매주 월~금 근무"
+  },
+  "work_days_desc": {
+    "value": "월~금",
+    "quote": "매주 월~금 근무"
+  },
+  "start_time": {
+    "value": "10:00",
+    "quote": "10시 00분부터 19시 00분까지 (휴게시간 12:00~13:00)"
+  },
+  "end_time": {
+    "value": "19:00",
+    "quote": "10시 00분부터 19시 00분까지 (휴게시간 12:00~13:00)"
+  },
+  "break_minutes": {
+    "value": 60,
+    "quote": "휴게시간 12:00~13:00"
+  },
+  "weekly_hours": {
+    "value": null,
+    "quote": null
+  },
+  "wage": {
+    "value": {
+      "type": "연봉",
+      "amount_min": 36000000,
+      "amount_max": 36000000
+    },
+    "quote": "연봉 36,000,000원"
+  },
+  "comprehensive_wage": {
+    "value": null,
+    "quote": null
+  },
+  "allowances": {
+    "value": null,
+    "quote": null
+  },
+  "pay_day": {
+    "value": "매월 10일",
+    "quote": "임금지급일 : 매월 10일"
+  },
+  "holidays": {
+    "value": "매주 일요일",
+    "quote": "주휴일 매주 일요일"
+  },
+  "annual_leave": {
+    "value": "근로기준법에 따라 부여",
+    "quote": "근로기준법에서 정하는 바에 따라 부여함"
+  },
+  "social_insurance": {
+    "value": "4대보험",
+    "quote": "고용보험, 산재보험, 국민연금, 건강보험"
+  },
+  "penalty_or_damages_clause": {
+    "value": "퇴사 30일 전에 알리지 않고 퇴사하는 경우 손해배상금으로 월급의 50%를 지급한다",
+    "quote": "퇴사 30일 전에 알리지 않고 퇴사하는 경우 손해배상금으로 월급의 50%를 지급한다."
+  }
+}

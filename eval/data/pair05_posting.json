@@ -1,0 +1,97 @@
+{
+  "doc_type": {
+    "value": "공고",
+    "quote": null
+  },
+  "company": {
+    "value": "(주)푸른마트(모의)",
+    "quote": "(주)푸른마트(모의)"
+  },
+  "headcount": {
+    "value": null,
+    "quote": null
+  },
+  "employment_type": {
+    "value": "정규직",
+    "quote": "정규직"
+  },
+  "contract_period_months": {
+    "value": null,
+    "quote": null
+  },
+  "probation": {
+    "value": null,
+    "quote": null
+  },
+  "workplace": {
+    "value": "인천 연수구 ○○동 매장",
+    "quote": "인천 연수구 ○○동 매장"
+  },
+  "job_duties": {
+    "value": "매장 진열 및 재고 관리",
+    "quote": "매장 진열 및 재고 관리"
+  },
+  "work_days_per_week": {
+    "value": 5,
+    "quote": "주 5일 (월~금)"
+  },
+  "work_days_desc": {
+    "value": "월~금",
+    "quote": "주 5일 (월~금)"
+  },
+  "start_time": {
+    "value": "09:00",
+    "quote": "09:00 ~ 18:00 (휴게 1시간)"
+  },
+  "end_time": {
+    "value": "18:00",
+    "quote": "09:00 ~ 18:00 (휴게 1시간)"
+  },
+  "break_minutes": {
+    "value": 60,
+    "quote": "휴게 1시간"
+  },
+  "weekly_hours": {
+    "value": null,
+    "quote": null
+  },
+  "wage": {
+    "value": {
+      "type": "월급",
+      "amount_min": 2600000,
+      "amount_max": 2600000
+    },
+    "quote": "월급 260만원"
+  },
+  "comprehensive_wage": {
+    "value": {
+      "included": true,
+      "overtime_hours_per_month": 10
+    },
+    "quote": "월 연장근로 10시간분 포함 포괄임금"
+  },
+  "allowances": {
+    "value": null,
+    "quote": null
+  },
+  "pay_day": {
+    "value": null,
+    "quote": null
+  },
+  "holidays": {
+    "value": null,
+    "quote": null
+  },
+  "annual_leave": {
+    "value": null,
+    "quote": null
+  },
+  "social_insurance": {
+    "value": "4대보험",
+    "quote": "4대보험 가입"
+  },
+  "penalty_or_damages_clause": {
+    "value": null,
+    "quote": null
+  }
+}
