@@ -13,6 +13,7 @@
 
 import argparse
 import json
+import os
 import sys
 import time
 from datetime import date
@@ -20,7 +21,9 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 EVAL_DIR = Path(__file__).resolve().parent
-sys.path.insert(0, str(EVAL_DIR.parent / "backend"))
+BACKEND = EVAL_DIR.parent / "backend"
+sys.path.insert(0, str(BACKEND))
+os.chdir(BACKEND)   # app.config가 .env를 현재 폴더 기준으로 읽으므로 (이 스크립트의 경로는 전부 절대경로)
 
 from app.ai.base import ExtractionError, ExtractionResult  # noqa: E402
 from app.ai.mask import mask_result  # noqa: E402
