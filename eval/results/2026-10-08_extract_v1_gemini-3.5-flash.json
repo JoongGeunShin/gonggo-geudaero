@@ -1,0 +1,3120 @@
+{
+ "meta": {
+  "date": "2026-10-08",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash",
+  "prompt_version": "extract_v1",
+  "pairs": [
+   "pair01",
+   "pair02",
+   "pair03",
+   "pair04",
+   "pair05",
+   "pair06",
+   "pair07",
+   "pair08",
+   "pair09",
+   "pair10",
+   "pair11"
+  ],
+  "note": "합성 데이터 기준"
+ },
+ "summary": {
+  "pairs_evaluated": 11,
+  "pairs_failed": 0,
+  "field_accuracy": {
+   "전체": {
+    "correct": 352,
+    "total": 352,
+    "rate": 1.0
+   },
+   "사진": {
+    "correct": 48,
+    "total": 48,
+    "rate": 1.0
+   },
+   "깨끗한 이미지": {
+    "correct": 304,
+    "total": 304,
+    "rate": 1.0
+   }
+  },
+  "per_field": {
+   "employment_type": {
+    "correct": 22,
+    "total": 22
+   },
+   "contract_period_months": {
+    "correct": 22,
+    "total": 22
+   },
+   "probation": {
+    "correct": 22,
+    "total": 22
+   },
+   "work_days_per_week": {
+    "correct": 22,
+    "total": 22
+   },
+   "start_time": {
+    "correct": 22,
+    "total": 22
+   },
+   "end_time": {
+    "correct": 22,
+    "total": 22
+   },
+   "break_minutes": {
+    "correct": 22,
+    "total": 22
+   },
+   "weekly_hours": {
+    "correct": 22,
+    "total": 22
+   },
+   "wage": {
+    "correct": 22,
+    "total": 22
+   },
+   "comprehensive_wage": {
+    "correct": 22,
+    "total": 22
+   },
+   "headcount": {
+    "correct": 22,
+    "total": 22
+   },
+   "workplace": {
+    "correct": 22,
+    "total": 22
+   },
+   "pay_day": {
+    "correct": 22,
+    "total": 22
+   },
+   "holidays": {
+    "correct": 22,
+    "total": 22
+   },
+   "annual_leave": {
+    "correct": 22,
+    "total": 22
+   },
+   "penalty_or_damages_clause": {
+    "correct": 22,
+    "total": 22
+   }
+  },
+  "quotes_dropped": 0,
+  "ocr_ratio_mean": 1.0,
+  "seconds_mean": 19.9,
+  "detection_core": {
+   "hit": 10,
+   "expected": 10,
+   "recall": 1.0,
+   "extra": 0
+  },
+  "detection_minor": {
+   "hit": 0,
+   "expected": 0,
+   "recall": null,
+   "extra": 0
+  },
+  "pairs_exact": 11
+ },
+ "pairs": {
+  "pair01": {
+   "photo": [],
+   "variations": [
+    "동일"
+   ],
+   "posting": {
+    "seconds": 12.9,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2500000,
+       "amount_max": 2500000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2500000,
+       "amount_max": 2500000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "경기 화성시 ○○로",
+      "gold": "경기 화성시 ○○로",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 14.6,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2500000,
+       "amount_max": 2500000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2500000,
+       "amount_max": 2500000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "경기 화성시 ○○로",
+      "gold": "경기 화성시 ○○로",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [],
+   "found": [],
+   "missed": [],
+   "extra": []
+  },
+  "pair02": {
+   "photo": [],
+   "variations": [
+    "동일"
+   ],
+   "posting": {
+    "seconds": 11.2,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "기타",
+      "gold": "기타",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 3,
+      "gold": 3,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "15:00",
+      "gold": "15:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 30,
+      "gold": 30,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "시급",
+       "amount_min": 11000,
+       "amount_max": 11000
+      },
+      "gold": {
+       "type": "시급",
+       "amount_min": 11000,
+       "amount_max": 11000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 마포구 ○○동 매장",
+      "gold": "서울 마포구 ○○동 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 11.7,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "기타",
+      "gold": "기타",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 3,
+      "gold": 3,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "15:00",
+      "gold": "15:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 30,
+      "gold": 30,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "시급",
+       "amount_min": 11000,
+       "amount_max": 11000
+      },
+      "gold": {
+       "type": "시급",
+       "amount_min": 11000,
+       "amount_max": 11000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 마포구 ○○동 매장",
+      "gold": "서울 마포구 ○○동 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [],
+   "found": [],
+   "missed": [],
+   "extra": []
+  },
+  "pair03": {
+   "photo": [],
+   "variations": [
+    "동일"
+   ],
+   "posting": {
+    "seconds": 7.7,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "19:00",
+      "gold": "19:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "연봉",
+       "amount_min": 36000000,
+       "amount_max": 36000000
+      },
+      "gold": {
+       "type": "연봉",
+       "amount_min": 36000000,
+       "amount_max": 36000000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 강남구 역삼동",
+      "gold": "서울 강남구 역삼동",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 10.8,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "19:00",
+      "gold": "19:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "연봉",
+       "amount_min": 36000000,
+       "amount_max": 36000000
+      },
+      "gold": {
+       "type": "연봉",
+       "amount_min": 36000000,
+       "amount_max": 36000000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 강남구 역삼동",
+      "gold": "서울 강남구 역삼동",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [],
+   "found": [],
+   "missed": [],
+   "extra": []
+  },
+  "pair04": {
+   "photo": [],
+   "variations": [
+    "동일"
+   ],
+   "posting": {
+    "seconds": 7.9,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "08:00",
+      "gold": "08:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "17:00",
+      "gold": "17:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 3000000,
+       "amount_max": 3500000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 3000000,
+       "amount_max": 3500000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "대전 유성구 ○○동 현장사무소",
+      "gold": "대전 유성구 ○○동 현장사무소",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 11.2,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "08:00",
+      "gold": "08:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "17:00",
+      "gold": "17:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 3000000,
+       "amount_max": 3000000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 3000000,
+       "amount_max": 3000000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "대전 유성구 ○○동 현장사무소",
+      "gold": "대전 유성구 ○○동 현장사무소",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [],
+   "found": [],
+   "missed": [],
+   "extra": []
+  },
+  "pair05": {
+   "photo": [],
+   "variations": [
+    "동일"
+   ],
+   "posting": {
+    "seconds": 10.0,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2600000,
+       "amount_max": 2600000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2600000,
+       "amount_max": 2600000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": {
+       "included": true,
+       "overtime_hours_per_month": 10
+      },
+      "gold": {
+       "included": true,
+       "overtime_hours_per_month": 10
+      },
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "인천 연수구 ○○동 매장",
+      "gold": "인천 연수구 ○○동 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 12.4,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2600000,
+       "amount_max": 2600000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2600000,
+       "amount_max": 2600000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": {
+       "included": true,
+       "overtime_hours_per_month": 10
+      },
+      "gold": {
+       "included": true,
+       "overtime_hours_per_month": 10
+      },
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "인천 연수구 ○○동 매장",
+      "gold": "인천 연수구 ○○동 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [],
+   "found": [],
+   "missed": [],
+   "extra": []
+  },
+  "pair06": {
+   "photo": [
+    "contract"
+   ],
+   "variations": [
+    "동일",
+    "사진"
+   ],
+   "posting": {
+    "seconds": 7.9,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "계약직",
+      "gold": "계약직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": 12,
+      "gold": 12,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2300000,
+       "amount_max": 2300000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2300000,
+       "amount_max": 2300000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "광주 북구 ○○로",
+      "gold": "광주 북구 ○○로",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 11.4,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "계약직",
+      "gold": "계약직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": 12,
+      "gold": 12,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2300000,
+       "amount_max": 2300000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2300000,
+       "amount_max": 2300000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "광주 북구 ○○로",
+      "gold": "광주 북구 ○○로",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [],
+   "found": [],
+   "missed": [],
+   "extra": []
+  },
+  "pair07": {
+   "photo": [],
+   "variations": [
+    "임금 감액"
+   ],
+   "posting": {
+    "seconds": 8.1,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2500000,
+       "amount_max": 2500000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2500000,
+       "amount_max": 2500000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "경기 화성시 ○○로",
+      "gold": "경기 화성시 ○○로",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 10.8,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "09:00",
+      "gold": "09:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "18:00",
+      "gold": "18:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2300000,
+       "amount_max": 2300000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2300000,
+       "amount_max": 2300000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "경기 화성시 ○○로",
+      "gold": "경기 화성시 ○○로",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "found": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "missed": [],
+   "extra": []
+  },
+  "pair08": {
+   "photo": [],
+   "variations": [
+    "임금 감액"
+   ],
+   "posting": {
+    "seconds": 8.5,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "기타",
+      "gold": "기타",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 3,
+      "gold": 3,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "15:00",
+      "gold": "15:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 30,
+      "gold": 30,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "시급",
+       "amount_min": 11000,
+       "amount_max": 11000
+      },
+      "gold": {
+       "type": "시급",
+       "amount_min": 11000,
+       "amount_max": 11000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 마포구 ○○동 매장",
+      "gold": "서울 마포구 ○○동 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 14.3,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "기타",
+      "gold": "기타",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 3,
+      "gold": 3,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "15:00",
+      "gold": "15:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 30,
+      "gold": 30,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "시급",
+       "amount_min": 10500,
+       "amount_max": 10500
+      },
+      "gold": {
+       "type": "시급",
+       "amount_min": 10500,
+       "amount_max": 10500
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 마포구 ○○동 매장",
+      "gold": "서울 마포구 ○○동 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "found": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "missed": [],
+   "extra": []
+  },
+  "pair09": {
+   "photo": [
+    "posting"
+   ],
+   "variations": [
+    "임금 감액",
+    "사진"
+   ],
+   "posting": {
+    "seconds": 7.7,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "19:00",
+      "gold": "19:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "연봉",
+       "amount_min": 36000000,
+       "amount_max": 36000000
+      },
+      "gold": {
+       "type": "연봉",
+       "amount_min": 36000000,
+       "amount_max": 36000000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 강남구 역삼동",
+      "gold": "서울 강남구 역삼동",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 81.9,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "10:00",
+      "gold": "10:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "19:00",
+      "gold": "19:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "연봉",
+       "amount_min": 33000000,
+       "amount_max": 33000000
+      },
+      "gold": {
+       "type": "연봉",
+       "amount_min": 33000000,
+       "amount_max": 33000000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "서울 강남구 역삼동",
+      "gold": "서울 강남구 역삼동",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "found": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "missed": [],
+   "extra": []
+  },
+  "pair10": {
+   "photo": [
+    "contract"
+   ],
+   "variations": [
+    "임금 감액",
+    "사진"
+   ],
+   "posting": {
+    "seconds": 10.5,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "08:00",
+      "gold": "08:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "17:00",
+      "gold": "17:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 3000000,
+       "amount_max": 3500000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 3000000,
+       "amount_max": 3500000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "대전 유성구 ○○동 현장사무소",
+      "gold": "대전 유성구 ○○동 현장사무소",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 41.9,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "정규직",
+      "gold": "정규직",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "08:00",
+      "gold": "08:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "17:00",
+      "gold": "17:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 60,
+      "gold": 60,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "월급",
+       "amount_min": 2800000,
+       "amount_max": 2800000
+      },
+      "gold": {
+       "type": "월급",
+       "amount_min": 2800000,
+       "amount_max": 2800000
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "대전 유성구 ○○동 현장사무소",
+      "gold": "대전 유성구 ○○동 현장사무소",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "found": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "missed": [],
+   "extra": []
+  },
+  "pair11": {
+   "photo": [],
+   "variations": [
+    "임금 감액"
+   ],
+   "posting": {
+    "seconds": 40.3,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "기타",
+      "gold": "기타",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "14:00",
+      "gold": "14:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "20:00",
+      "gold": "20:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 30,
+      "gold": 30,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "시급",
+       "amount_min": 10800,
+       "amount_max": 10800
+      },
+      "gold": {
+       "type": "시급",
+       "amount_min": 10800,
+       "amount_max": 10800
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "부산 해운대구 ○○로 매장",
+      "gold": "부산 해운대구 ○○로 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "contract": {
+    "seconds": 83.3,
+    "ocr_ratio": 1.0,
+    "fields": [
+     {
+      "field": "employment_type",
+      "ok": true,
+      "pred": "기타",
+      "gold": "기타",
+      "dropped": null
+     },
+     {
+      "field": "contract_period_months",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "probation",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "work_days_per_week",
+      "ok": true,
+      "pred": 5,
+      "gold": 5,
+      "dropped": null
+     },
+     {
+      "field": "start_time",
+      "ok": true,
+      "pred": "14:00",
+      "gold": "14:00",
+      "dropped": null
+     },
+     {
+      "field": "end_time",
+      "ok": true,
+      "pred": "20:00",
+      "gold": "20:00",
+      "dropped": null
+     },
+     {
+      "field": "break_minutes",
+      "ok": true,
+      "pred": 30,
+      "gold": 30,
+      "dropped": null
+     },
+     {
+      "field": "weekly_hours",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "wage",
+      "ok": true,
+      "pred": {
+       "type": "시급",
+       "amount_min": 10320,
+       "amount_max": 10320
+      },
+      "gold": {
+       "type": "시급",
+       "amount_min": 10320,
+       "amount_max": 10320
+      },
+      "dropped": null
+     },
+     {
+      "field": "comprehensive_wage",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "headcount",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     },
+     {
+      "field": "workplace",
+      "ok": true,
+      "pred": "부산 해운대구 ○○로 매장",
+      "gold": "부산 해운대구 ○○로 매장",
+      "dropped": null
+     },
+     {
+      "field": "pay_day",
+      "ok": true,
+      "pred": "매월 10일",
+      "gold": "매월 10일",
+      "dropped": null
+     },
+     {
+      "field": "holidays",
+      "ok": true,
+      "pred": "주휴일 매주 일요일",
+      "gold": "매주 일요일",
+      "dropped": null
+     },
+     {
+      "field": "annual_leave",
+      "ok": true,
+      "pred": "근로기준법에서 정하는 바에 따라 부여함",
+      "gold": "근로기준법에 따라 부여",
+      "dropped": null
+     },
+     {
+      "field": "penalty_or_damages_clause",
+      "ok": true,
+      "pred": null,
+      "gold": null,
+      "dropped": null
+     }
+    ]
+   },
+   "expected": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "found": [
+    [
+     "불리 변경",
+     "임금(기본 시급)"
+    ],
+    [
+     "불리 변경",
+     "임금(월 환산)"
+    ]
+   ],
+   "missed": [],
+   "extra": []
+  }
+ }
+}
