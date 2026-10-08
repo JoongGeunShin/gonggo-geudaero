@@ -3,10 +3,11 @@
     backend/.venv/Scripts/python eval/run_eval.py --provider mock          # 파이프라인 점검 (정답을 그대로 돌려줌 → 100%)
     backend/.venv/Scripts/python eval/run_eval.py --provider gemini        # 실제 평가 (.env의 GEMINI_MODEL)
     backend/.venv/Scripts/python eval/run_eval.py --provider gemini --pairs pair01,pair07 --sleep 10
+    backend/.venv/Scripts/python eval/run_eval.py --provider gemini --prompt extract_v2   # 프롬프트 비교
 
 - 한 번 추출한 결과는 eval/cache/<제공자_모델_프롬프트>/에 저장하고, 다시 돌릴 때는 부르지 않는다 (--no-cache로 무시).
 - 무료 티어 분당 한도 때문에 실제 호출 사이에 --sleep 초만큼 쉰다. 연속 3번 실패하면 한도 소진으로 보고 멈춘다.
-- 결과는 표로 출력하고 eval/results/날짜_프롬프트버전_제공자.json에 저장한다.
+- 결과는 표로 출력하고 eval/results/날짜_프롬프트버전_모델.json에 저장한다.
 
 합성 데이터 기준 숫자다. 실제 문서 정확도와 다를 수 있다.
 """
@@ -109,7 +110,7 @@ def flags(findings) -> set[tuple[str, str]]:
 
 # ---------------------------------------------------------------- 추출 (캐시)
 
-def make_extractor(provider: str, model: str):
+def make_extractor(provider: str, model: str, prompt_version: str):
     if provider == "mock":
         from app.ai.mock import MockExtractor
         return MockExtractor(samples_dir=DATA), "mock"
@@ -119,7 +120,7 @@ def make_extractor(provider: str, model: str):
         model = model or settings.gemini_model
         if not settings.gemini_api_key or not model:
             sys.exit("GEMINI_API_KEY와 GEMINI_MODEL(.env 또는 --model)이 필요합니다")
-        return GeminiExtractor(api_key=settings.gemini_api_key, model=model), model
+        return GeminiExtractor(api_key=settings.gemini_api_key, model=model, prompt_version=prompt_version), model
     sys.exit(f"지원하지 않는 제공자: {provider}")
 
 
@@ -169,6 +170,8 @@ def evaluate(runner: CachedRunner, answer_key: dict, pairs: list[str], max_conse
                 print(f"  ✗ {name}: 추출 실패 — {e}", flush=True)
                 row["error"] = f"{kind}: {e}"
                 errors_in_row += 1
+                if "(429)" in str(e):   # 백오프 재시도 후에도 429면 일일 한도 소진 — 더 불러도 소용없다
+                    errors_in_row = max_consecutive_errors
                 break
             # 서비스(services/extraction.py)와 같은 순서: 인용 검증 → 마스킹
             result = mask_result(verify_quotes(raw))
@@ -188,7 +191,7 @@ def evaluate(runner: CachedRunner, answer_key: dict, pairs: list[str], max_conse
                   + (f" | 추가 {row['extra']}" if row["extra"] else ""), flush=True)
         report[pair] = row
         if errors_in_row >= max_consecutive_errors:
-            print(f"  연속 {errors_in_row}번 실패 — 한도 소진으로 보고 멈춤. 나중에 다시 실행하면 캐시 이후부터 이어감.")
+            print("  한도 소진(429) 또는 연속 실패로 멈춤. 나중에 다시 실행하면 캐시 이후부터 이어감.")
             break
     return report
 
@@ -269,6 +272,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--provider", default="mock", choices=["mock", "gemini"])
     ap.add_argument("--model", default="", help="비우면 .env의 GEMINI_MODEL")
+    ap.add_argument("--prompt", default=EXTRACT_PROMPT_VERSION, help="추출 프롬프트 버전 (app/ai/prompts/*.md)")
     ap.add_argument("--pairs", default="", help="쉼표로 구분 (예: pair01,pair07). 비우면 40쌍 전부")
     ap.add_argument("--sleep", type=float, default=6.0, help="실제 호출 사이 최소 간격(초)")
     ap.add_argument("--no-cache", action="store_true")
@@ -277,8 +281,8 @@ def main(argv=None):
 
     answer_key = json.loads((DATA / "answer_key.json").read_text(encoding="utf-8"))
     pairs = [p.strip() for p in args.pairs.split(",") if p.strip()] or sorted(answer_key)
-    extractor, model = make_extractor(args.provider, args.model)
-    tag = f"{args.provider}_{model}_{EXTRACT_PROMPT_VERSION}" if args.provider != "mock" else "mock"
+    extractor, model = make_extractor(args.provider, args.model, args.prompt)
+    tag = f"{args.provider}_{model}_{args.prompt}" if args.provider != "mock" else "mock"
     sleep = 0 if args.provider == "mock" else args.sleep   # mock은 한도가 없다
     runner = CachedRunner(extractor, EVAL_DIR / "cache" / tag, use_cache=not args.no_cache, sleep=sleep)
 
@@ -289,10 +293,10 @@ def main(argv=None):
     print(f"\n  호출 {runner.called}회 · 캐시 사용 {runner.cached}회")
 
     if not args.no_save:
-        out = EVAL_DIR / "results" / f"{date.today()}_{EXTRACT_PROMPT_VERSION}_{args.provider}.json"
+        out = EVAL_DIR / "results" / f"{date.today()}_{args.prompt}_{model}.json"
         out.parent.mkdir(exist_ok=True)
         meta = {"date": str(date.today()), "provider": args.provider, "model": model,
-                "prompt_version": EXTRACT_PROMPT_VERSION, "pairs": pairs, "note": "합성 데이터 기준"}
+                "prompt_version": args.prompt, "pairs": pairs, "note": "합성 데이터 기준"}
         out.write_text(json.dumps({"meta": meta, "summary": summary, "pairs": report}, ensure_ascii=False, indent=1)
                        + "\n", encoding="utf-8")
         print(f"  저장: {out.relative_to(EVAL_DIR.parent)}")
