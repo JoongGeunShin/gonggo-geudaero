@@ -19,8 +19,14 @@ def test_regular_to_non_regular_is_unfavorable():
 
 
 def test_different_employment_wording_is_ambiguous():
-    found = engine.check_employment_type(make_doc(employment_type="계약직"), make_doc(employment_type="기간제"))
+    found = engine.check_employment_type(make_doc(employment_type="계약직"), make_doc(employment_type="파견"))
     assert items(found) == {(GRAY, "고용형태")}
+
+
+def test_fixed_term_and_contract_worker_are_the_same():
+    # 표준 양식 제목이 '기간제 근로자 표준근로계약서'라 공고 '계약직' ↔ 계약서 '기간제'는 흔하다 (Phase 10 평가에서 발견)
+    assert engine.check_employment_type(make_doc(employment_type="계약직"), make_doc(employment_type="기간제")) == []
+    assert engine.check_employment_type(make_doc(employment_type="기간제"), make_doc(employment_type="계약직")) == []
 
 
 def test_same_employment_type_is_fine():
