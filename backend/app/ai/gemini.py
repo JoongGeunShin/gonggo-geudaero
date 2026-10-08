@@ -98,13 +98,15 @@ def generate_with_retry(client, model: str, contents, config, *, max_retries: in
 
 class GeminiExtractor:
     def __init__(self, client=None, model: str = "", api_key: str = "",
-                 max_retries: int = 3, sleep: Callable[[float], None] = time.sleep):
+                 max_retries: int = 3, sleep: Callable[[float], None] = time.sleep,
+                 prompt_version: str = EXTRACT_PROMPT_VERSION):
         self.client = client or genai.Client(
             api_key=api_key, http_options=types.HttpOptions(timeout=TIMEOUT_MS))
         self.model = model
         self.max_retries = max_retries
         self.sleep = sleep
-        self.prompt = load_prompt(EXTRACT_PROMPT_VERSION)
+        self.prompt_version = prompt_version   # Phase 10 평가에서 v1·v2를 같은 데이터로 비교할 때 바꿔 끼운다
+        self.prompt = load_prompt(prompt_version)
 
     def extract(self, image_bytes: bytes, media_type: str, doc_kind: DocKind) -> ExtractionResult:
         contents = [
