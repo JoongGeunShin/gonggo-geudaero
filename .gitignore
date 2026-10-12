@@ -30,3 +30,4 @@ backend/uploads/
 공고그대로_MVP_개발가이드.md
 # 평가 추출 캐시 (재실행 시 호출 절약용, 결과는 eval/results에 남김)
 eval/cache/
+DOCS/공고업로드_흐름.md
