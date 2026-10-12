@@ -1,10 +1,11 @@
 "use client";
 
+import ConditionCard from "@/components/ConditionCard";
+import FileDropzone from "@/components/FileDropzone";
+import { ApiError, extractPosting, type Posting } from "@/lib/api";
+import { checkFile } from "@/lib/upload";
 import Link from "next/link";
 import { useState } from "react";
-import ConditionCard from "@/components/ConditionCard";
-import { ApiError, extractPosting, type Posting } from "@/lib/api";
-import { checkFile, FILE_ACCEPT, FILE_HINT } from "@/lib/upload";
 
 type State =
   | { kind: "idle" }
@@ -14,7 +15,8 @@ type State =
 
 function errorMessage(e: unknown): string {
   if (e instanceof ApiError) {
-    if (e.status === 502) return "AI가 공고를 읽지 못했어요. 잠시 뒤 다시 시도해 주세요.";
+    if (e.status === 502)
+      return "AI가 공고를 읽지 못했어요. 잠시 뒤 다시 시도해 주세요.";
     return e.detail;
   }
   // fetch 자체가 실패 = 서버가 꺼져 있거나 주소가 틀림
@@ -28,7 +30,7 @@ export default function PostingUpload() {
 
   const loading = state.kind === "loading";
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault(); // 브라우저 기본 동작(페이지 새로고침) 막기
     if (!file) return;
 
@@ -87,15 +89,12 @@ export default function PostingUpload() {
         <label htmlFor="posting-file" className="block font-bold">
           공고 캡처 <span className="text-danger">*</span>
         </label>
-        <input
+        <FileDropzone
           id="posting-file"
-          type="file"
-          accept={FILE_ACCEPT}
+          file={file}
+          onFileChange={setFile}
           disabled={loading}
-          onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-          className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-primary-soft file:px-4 file:py-2 file:text-primary"
         />
-        <p className="text-xs text-sub">{FILE_HINT}</p>
       </div>
 
       <div className="space-y-2">
@@ -111,17 +110,25 @@ export default function PostingUpload() {
           placeholder="https://"
           className="w-full rounded-lg border border-line px-3 py-2"
         />
-        <p className="text-xs text-sub">기록용으로만 저장하고 접속하지는 않아요.</p>
+        <p className="text-xs text-sub">
+          기록용으로만 저장하고 접속하지는 않아요.
+        </p>
       </div>
 
       {state.kind === "error" && (
-        <p role="alert" className="rounded-lg bg-danger-soft px-4 py-3 text-danger">
+        <p
+          role="alert"
+          className="rounded-lg bg-danger-soft px-4 py-3 text-danger"
+        >
           {state.message}
         </p>
       )}
 
       {loading && (
-        <p role="status" className="rounded-lg bg-primary-soft px-4 py-3 text-primary">
+        <p
+          role="status"
+          className="rounded-lg bg-primary-soft px-4 py-3 text-primary"
+        >
           공고를 읽고 있어요. 1~2분 걸릴 수 있으니 창을 닫지 말아 주세요.
         </p>
       )}

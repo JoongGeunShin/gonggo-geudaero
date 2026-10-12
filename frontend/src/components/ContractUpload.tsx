@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import FileDropzone from "@/components/FileDropzone";
 import { ApiError, compareContract } from "@/lib/api";
-import { checkFile, FILE_ACCEPT, FILE_HINT } from "@/lib/upload";
+import { checkFile } from "@/lib/upload";
 
 type State =
   | { kind: "idle" }
@@ -76,15 +77,12 @@ export default function ContractUpload({ postingId }: Props) {
         <label htmlFor="contract-file" className="block font-bold">
           근로계약서 사진 <span className="text-danger">*</span>
         </label>
-        <input
+        <FileDropzone
           id="contract-file"
-          type="file"
-          accept={FILE_ACCEPT}
+          file={file}
+          onFileChange={setFile}
           disabled={busy}
-          onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-          className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-primary-soft file:px-4 file:py-2 file:text-primary"
         />
-        <p className="text-xs text-sub">{FILE_HINT}</p>
       </div>
 
       {state.kind === "error" && (
