@@ -12,7 +12,12 @@ type Props = {
 
 // 클릭해서 고르기 + 끌어다 놓기를 모두 지원하는 파일 선택 영역
 // 파일 상태는 부모가 들고, 여기서는 "끌어오는 중인지"만 관리한다
-export default function FileDropzone({ id, file, onFileChange, disabled }: Props) {
+export default function FileDropzone({
+  id,
+  file,
+  onFileChange,
+  disabled,
+}: Props) {
   const [dragging, setDragging] = useState(false);
 
   function handleDragEnter(e: React.DragEvent<HTMLLabelElement>) {
@@ -111,7 +116,7 @@ function FilePreview({ file }: { file: File }) {
     <img
       ref={attachPreview}
       alt="고른 파일 미리보기"
-      className="max-h-48 max-w-full rounded-md border border-line object-contain"
+      className=" max-w-full rounded-md border border-line object-contain"
     />
   );
 }
